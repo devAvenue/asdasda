@@ -1,0 +1,2820 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="icon" href="{% static 'app/img/favicon.png' %}"/>
+    <title>BitVest | Terms Of Service</title>
+    <link href="{% static 'app/css/app.b936d481.css' %}" rel="preload" as="style"/>
+    <link href="{% static 'app/css/app.b936d481.css' %}" rel="stylesheet"/>
+    {% comment %} <link href="{% static 'app/css/style.css' %}" rel="stylesheet" /> {% endcomment %}
+    <link href="{% static 'app/css/chunk-vendors.b036e5c1.css' %}" rel="preload" as="style"/>
+    <link href="{% static 'app/css/chunk-vendors.b036e5c1.css' %}" rel="stylesheet"/>
+    <link href="{% static 'app/js/app.b8813481.js' %}" rel="preload" as="script"/>
+    <link href="{% static 'app/js/chunk-vendors.efa751ce.js' %}" rel="preload" as="script"/>
+    <style type="text/css">
+        @media (min-width: 992px){.nb-t{display:none!important}}
+        .logo {
+            font-size: 30px;
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo a {
+            color: #053EFF;
+            text-transform: capitalize;
+            font-size: large;
+            font-weight: bolder;
+        }
+
+        .logo span {
+            color: #000;
+        }
+
+        .VueCarousel-navigation-button[data-v-453ad8cd] {
+            position: absolute;
+            top: 50%;
+            box-sizing: border-box;
+            color: #000;
+            text-decoration: none;
+            appearance: none;
+            border: none;
+            background-color: transparent;
+            padding: 0;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .VueCarousel-navigation-button[data-v-453ad8cd]:focus {
+            outline: 1px solid lightblue;
+        }
+
+        .VueCarousel-navigation-next[data-v-453ad8cd] {
+            right: 0;
+            transform: translateY(-50%) translateX(100%);
+            font-family: "system";
+        }
+
+        .VueCarousel-navigation-prev[data-v-453ad8cd] {
+            left: 0;
+            transform: translateY(-50%) translateX(-100%);
+            font-family: "system";
+        }
+
+        .VueCarousel-navigation--disabled[data-v-453ad8cd] {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        /* Define the "system" font family */
+        @font-face {
+            font-family: system;
+            font-style: normal;
+            font-weight: 300;
+            src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Symbol"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+        }
+    </style>
+    <style type="text/css">
+        .VueCarousel-pagination[data-v-438fd353] {
+            width: 100%;
+            text-align: center;
+        }
+
+        .VueCarousel-pagination--top-overlay[data-v-438fd353] {
+            position: absolute;
+            top: 0;
+        }
+
+        .VueCarousel-pagination--bottom-overlay[data-v-438fd353] {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .VueCarousel-dot-container[data-v-438fd353] {
+            display: inline-block;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .VueCarousel-dot[data-v-438fd353] {
+            display: inline-block;
+            cursor: pointer;
+            appearance: none;
+            border: none;
+            background-clip: content-box;
+            box-sizing: content-box;
+            padding: 0;
+            border-radius: 100%;
+            outline: none;
+        }
+
+        .VueCarousel-dot[data-v-438fd353]:focus {
+            outline: 1px solid lightblue;
+        }
+    </style>
+    <style type="text/css">
+        .VueCarousel-slide {
+            flex-basis: inherit;
+            flex-grow: 0;
+            flex-shrink: 0;
+            user-select: none;
+            backface-visibility: hidden;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            outline: none;
+        }
+
+        .VueCarousel-slide-adjustableHeight {
+            display: table;
+            flex-basis: auto;
+            width: 100%;
+        }
+    </style>
+    <style type="text/css">
+        .VueCarousel {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .VueCarousel--reverse {
+            flex-direction: column-reverse;
+        }
+
+        .VueCarousel-wrapper {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .VueCarousel-inner {
+            display: flex;
+            flex-direction: row;
+            backface-visibility: hidden;
+        }
+
+        .VueCarousel-inner--center {
+            justify-content: center;
+        }
+    </style>
+    <style type="text/css">
+        .apexcharts-canvas {
+            position: relative;
+            user-select: none;
+            /* cannot give overflow: hidden as it will crop tooltips which overflow outside chart area */
+        }
+
+        /* scrollbar is not visible by default for legend, hence forcing the visibility */
+        .apexcharts-canvas ::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 6px;
+        }
+
+        .apexcharts-canvas ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+            -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+        }
+
+        .apexcharts-inner {
+            position: relative;
+        }
+
+        .apexcharts-text tspan {
+            font-family: inherit;
+        }
+
+        .legend-mouseover-inactive {
+            transition: 0.15s ease all;
+            opacity: 0.2;
+        }
+
+        .apexcharts-series-collapsed {
+            opacity: 0;
+        }
+
+        .apexcharts-tooltip {
+            border-radius: 5px;
+            box-shadow: 2px 2px 6px -4px #999;
+            cursor: default;
+            font-size: 14px;
+            left: 62px;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            top: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 12;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-tooltip.apexcharts-active {
+            opacity: 1;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-tooltip.apexcharts-theme-light {
+            border: 1px solid #e3e3e3;
+            background: rgba(255, 255, 255, 0.96);
+        }
+
+        .apexcharts-tooltip.apexcharts-theme-dark {
+            color: #fff;
+            background: rgba(30, 30, 30, 0.8);
+        }
+
+        .apexcharts-tooltip * {
+            font-family: inherit;
+        }
+
+        .apexcharts-tooltip-title {
+            padding: 6px;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+            background: #eceff1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .apexcharts-tooltip.apexcharts-theme-dark .apexcharts-tooltip-title {
+            background: rgba(0, 0, 0, 0.7);
+            border-bottom: 1px solid #333;
+        }
+
+        .apexcharts-tooltip-text-value,
+        .apexcharts-tooltip-text-z-value {
+            display: inline-block;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .apexcharts-tooltip-text-z-label:empty,
+        .apexcharts-tooltip-text-z-value:empty {
+            display: none;
+        }
+
+        .apexcharts-tooltip-text-value,
+        .apexcharts-tooltip-text-z-value {
+            font-weight: 600;
+        }
+
+        .apexcharts-tooltip-marker {
+            width: 12px;
+            height: 12px;
+            position: relative;
+            top: 0px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .apexcharts-tooltip-series-group {
+            padding: 0 10px;
+            display: none;
+            text-align: left;
+            justify-content: left;
+            align-items: center;
+        }
+
+        .apexcharts-tooltip-series-group.apexcharts-active .apexcharts-tooltip-marker {
+            opacity: 1;
+        }
+
+        .apexcharts-tooltip-series-group.apexcharts-active,
+        .apexcharts-tooltip-series-group:last-child {
+            padding-bottom: 4px;
+        }
+
+        .apexcharts-tooltip-series-group-hidden {
+            opacity: 0;
+            height: 0;
+            line-height: 0;
+            padding: 0 !important;
+        }
+
+        .apexcharts-tooltip-y-group {
+            padding: 6px 0 5px;
+        }
+
+        .apexcharts-tooltip-box,
+        .apexcharts-custom-tooltip {
+            padding: 4px 8px;
+        }
+
+        .apexcharts-tooltip-boxPlot {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .apexcharts-tooltip-box > div {
+            margin: 4px 0;
+        }
+
+        .apexcharts-tooltip-box span.value {
+            font-weight: bold;
+        }
+
+        .apexcharts-tooltip-rangebar {
+            padding: 5px 8px;
+        }
+
+        .apexcharts-tooltip-rangebar .category {
+            font-weight: 600;
+            color: #777;
+        }
+
+        .apexcharts-tooltip-rangebar .series-name {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .apexcharts-xaxistooltip {
+            opacity: 0;
+            padding: 9px 10px;
+            pointer-events: none;
+            color: #373d3f;
+            font-size: 13px;
+            text-align: center;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+            background: #eceff1;
+            border: 1px solid #90a4ae;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-xaxistooltip.apexcharts-theme-dark {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .apexcharts-xaxistooltip:after,
+        .apexcharts-xaxistooltip:before {
+            left: 50%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .apexcharts-xaxistooltip:after {
+            border-color: rgba(236, 239, 241, 0);
+            border-width: 6px;
+            margin-left: -6px;
+        }
+
+        .apexcharts-xaxistooltip:before {
+            border-color: rgba(144, 164, 174, 0);
+            border-width: 7px;
+            margin-left: -7px;
+        }
+
+        .apexcharts-xaxistooltip-bottom:after,
+        .apexcharts-xaxistooltip-bottom:before {
+            bottom: 100%;
+        }
+
+        .apexcharts-xaxistooltip-top:after,
+        .apexcharts-xaxistooltip-top:before {
+            top: 100%;
+        }
+
+        .apexcharts-xaxistooltip-bottom:after {
+            border-bottom-color: #eceff1;
+        }
+
+        .apexcharts-xaxistooltip-bottom:before {
+            border-bottom-color: #90a4ae;
+        }
+
+        .apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:after {
+            border-bottom-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:before {
+            border-bottom-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-xaxistooltip-top:after {
+            border-top-color: #eceff1;
+        }
+
+        .apexcharts-xaxistooltip-top:before {
+            border-top-color: #90a4ae;
+        }
+
+        .apexcharts-xaxistooltip-top.apexcharts-theme-dark:after {
+            border-top-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-xaxistooltip-top.apexcharts-theme-dark:before {
+            border-top-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-xaxistooltip.apexcharts-active {
+            opacity: 1;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-yaxistooltip {
+            opacity: 0;
+            padding: 4px 10px;
+            pointer-events: none;
+            color: #373d3f;
+            font-size: 13px;
+            text-align: center;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+            background: #eceff1;
+            border: 1px solid #90a4ae;
+        }
+
+        .apexcharts-yaxistooltip.apexcharts-theme-dark {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .apexcharts-yaxistooltip:after,
+        .apexcharts-yaxistooltip:before {
+            top: 50%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .apexcharts-yaxistooltip:after {
+            border-color: rgba(236, 239, 241, 0);
+            border-width: 6px;
+            margin-top: -6px;
+        }
+
+        .apexcharts-yaxistooltip:before {
+            border-color: rgba(144, 164, 174, 0);
+            border-width: 7px;
+            margin-top: -7px;
+        }
+
+        .apexcharts-yaxistooltip-left:after,
+        .apexcharts-yaxistooltip-left:before {
+            left: 100%;
+        }
+
+        .apexcharts-yaxistooltip-right:after,
+        .apexcharts-yaxistooltip-right:before {
+            right: 100%;
+        }
+
+        .apexcharts-yaxistooltip-left:after {
+            border-left-color: #eceff1;
+        }
+
+        .apexcharts-yaxistooltip-left:before {
+            border-left-color: #90a4ae;
+        }
+
+        .apexcharts-yaxistooltip-left.apexcharts-theme-dark:after {
+            border-left-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-yaxistooltip-left.apexcharts-theme-dark:before {
+            border-left-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-yaxistooltip-right:after {
+            border-right-color: #eceff1;
+        }
+
+        .apexcharts-yaxistooltip-right:before {
+            border-right-color: #90a4ae;
+        }
+
+        .apexcharts-yaxistooltip-right.apexcharts-theme-dark:after {
+            border-right-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-yaxistooltip-right.apexcharts-theme-dark:before {
+            border-right-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-yaxistooltip.apexcharts-active {
+            opacity: 1;
+        }
+
+        .apexcharts-yaxistooltip-hidden {
+            display: none;
+        }
+
+        .apexcharts-xcrosshairs,
+        .apexcharts-ycrosshairs {
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-xcrosshairs.apexcharts-active,
+        .apexcharts-ycrosshairs.apexcharts-active {
+            opacity: 1;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-ycrosshairs-hidden {
+            opacity: 0;
+        }
+
+        .apexcharts-selection-rect {
+            cursor: move;
+        }
+
+        .svg_select_boundingRect,
+        .svg_select_points_rot {
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .apexcharts-selection-rect + g .svg_select_boundingRect,
+        .apexcharts-selection-rect + g .svg_select_points_rot {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .apexcharts-selection-rect + g .svg_select_points_l,
+        .apexcharts-selection-rect + g .svg_select_points_r {
+            cursor: ew-resize;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .svg_select_points {
+            fill: #efefef;
+            stroke: #333;
+            rx: 2;
+        }
+
+        .apexcharts-svg.apexcharts-zoomable.hovering-zoom {
+            cursor: crosshair;
+        }
+
+        .apexcharts-svg.apexcharts-zoomable.hovering-pan {
+            cursor: move;
+        }
+
+        .apexcharts-zoom-icon,
+        .apexcharts-zoomin-icon,
+        .apexcharts-zoomout-icon,
+        .apexcharts-reset-icon,
+        .apexcharts-pan-icon,
+        .apexcharts-selection-icon,
+        .apexcharts-menu-icon,
+        .apexcharts-toolbar-custom-icon {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            line-height: 24px;
+            color: #6e8192;
+            text-align: center;
+        }
+
+        .apexcharts-zoom-icon svg,
+        .apexcharts-zoomin-icon svg,
+        .apexcharts-zoomout-icon svg,
+        .apexcharts-reset-icon svg,
+        .apexcharts-menu-icon svg {
+            fill: #6e8192;
+        }
+
+        .apexcharts-selection-icon svg {
+            fill: #444;
+            transform: scale(0.76);
+        }
+
+        .apexcharts-theme-dark .apexcharts-zoom-icon svg,
+        .apexcharts-theme-dark .apexcharts-zoomin-icon svg,
+        .apexcharts-theme-dark .apexcharts-zoomout-icon svg,
+        .apexcharts-theme-dark .apexcharts-reset-icon svg,
+        .apexcharts-theme-dark .apexcharts-pan-icon svg,
+        .apexcharts-theme-dark .apexcharts-selection-icon svg,
+        .apexcharts-theme-dark .apexcharts-menu-icon svg,
+        .apexcharts-theme-dark .apexcharts-toolbar-custom-icon svg {
+            fill: #f3f4f5;
+        }
+
+        .apexcharts-canvas .apexcharts-zoom-icon.apexcharts-selected svg,
+        .apexcharts-canvas .apexcharts-selection-icon.apexcharts-selected svg,
+        .apexcharts-canvas .apexcharts-reset-zoom-icon.apexcharts-selected svg {
+            fill: #008ffb;
+        }
+
+        .apexcharts-theme-light .apexcharts-selection-icon:not(.apexcharts-selected):hover svg,
+        .apexcharts-theme-light .apexcharts-zoom-icon:not(.apexcharts-selected):hover svg,
+        .apexcharts-theme-light .apexcharts-zoomin-icon:hover svg,
+        .apexcharts-theme-light .apexcharts-zoomout-icon:hover svg,
+        .apexcharts-theme-light .apexcharts-reset-icon:hover svg,
+        .apexcharts-theme-light .apexcharts-menu-icon:hover svg {
+            fill: #333;
+        }
+
+        .apexcharts-selection-icon,
+        .apexcharts-menu-icon {
+            position: relative;
+        }
+
+        .apexcharts-reset-icon {
+            margin-left: 5px;
+        }
+
+        .apexcharts-zoom-icon,
+        .apexcharts-reset-icon,
+        .apexcharts-menu-icon {
+            transform: scale(0.85);
+        }
+
+        .apexcharts-zoomin-icon,
+        .apexcharts-zoomout-icon {
+            transform: scale(0.7);
+        }
+
+        .apexcharts-zoomout-icon {
+            margin-right: 3px;
+        }
+
+        .apexcharts-pan-icon {
+            transform: scale(0.62);
+            position: relative;
+            left: 1px;
+            top: 0px;
+        }
+
+        .apexcharts-pan-icon svg {
+            fill: #fff;
+            stroke: #6e8192;
+            stroke-width: 2;
+        }
+
+        .apexcharts-pan-icon.apexcharts-selected svg {
+            stroke: #008ffb;
+        }
+
+        .apexcharts-pan-icon:not(.apexcharts-selected):hover svg {
+            stroke: #333;
+        }
+
+        .apexcharts-toolbar {
+            position: absolute;
+            z-index: 11;
+            max-width: 176px;
+            text-align: right;
+            border-radius: 3px;
+            padding: 0px 6px 2px 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .apexcharts-menu {
+            background: #fff;
+            position: absolute;
+            top: 100%;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 3px;
+            right: 10px;
+            opacity: 0;
+            min-width: 110px;
+            transition: 0.15s ease all;
+            pointer-events: none;
+        }
+
+        .apexcharts-menu.apexcharts-menu-open {
+            opacity: 1;
+            pointer-events: all;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-menu-item {
+            padding: 6px 7px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .apexcharts-theme-light .apexcharts-menu-item:hover {
+            background: #eee;
+        }
+
+        .apexcharts-theme-dark .apexcharts-menu {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+
+        @media screen and (min-width: 768px) {
+            .apexcharts-canvas:hover .apexcharts-toolbar {
+                opacity: 1;
+            }
+        }
+
+        .apexcharts-datalabel.apexcharts-element-hidden {
+            opacity: 0;
+        }
+
+        .apexcharts-pie-label,
+        .apexcharts-datalabels,
+        .apexcharts-datalabel,
+        .apexcharts-datalabel-label,
+        .apexcharts-datalabel-value {
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .apexcharts-pie-label-delay {
+            opacity: 0;
+            animation-name: opaque;
+            animation-duration: 0.3s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease;
+        }
+
+        .apexcharts-canvas .apexcharts-element-hidden {
+            opacity: 0;
+        }
+
+        .apexcharts-hide .apexcharts-series-points {
+            opacity: 0;
+        }
+
+        .apexcharts-gridline,
+        .apexcharts-annotation-rect,
+        .apexcharts-tooltip .apexcharts-marker,
+        .apexcharts-area-series .apexcharts-area,
+        .apexcharts-line,
+        .apexcharts-zoom-rect,
+        .apexcharts-toolbar svg,
+        .apexcharts-area-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+        .apexcharts-line-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+        .apexcharts-radar-series path,
+        .apexcharts-radar-series polygon {
+            pointer-events: none;
+        }
+
+        /* markers */
+
+        .apexcharts-marker {
+            transition: 0.15s ease all;
+        }
+
+        @keyframes opaque {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Resize generated styles */
+
+        @keyframes resizeanim {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .resize-triggers {
+            animation: 1ms resizeanim;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .resize-triggers,
+        .resize-triggers > div,
+        .contract-trigger:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .resize-triggers > div {
+            background: #eee;
+            overflow: auto;
+        }
+
+        .contract-trigger:before {
+            width: 200%;
+            height: 200%;
+        }
+    </style>
+    <style type="text/css">
+        .apexcharts-canvas {
+            position: relative;
+            user-select: none;
+            /* cannot give overflow: hidden as it will crop tooltips which overflow outside chart area */
+        }
+
+        /* scrollbar is not visible by default for legend, hence forcing the visibility */
+        .apexcharts-canvas ::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 6px;
+        }
+
+        .apexcharts-canvas ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+            -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+        }
+
+        .apexcharts-inner {
+            position: relative;
+        }
+
+        .apexcharts-text tspan {
+            font-family: inherit;
+        }
+
+        .legend-mouseover-inactive {
+            transition: 0.15s ease all;
+            opacity: 0.2;
+        }
+
+        .apexcharts-series-collapsed {
+            opacity: 0;
+        }
+
+        .apexcharts-tooltip {
+            border-radius: 5px;
+            box-shadow: 2px 2px 6px -4px #999;
+            cursor: default;
+            font-size: 14px;
+            left: 62px;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            top: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 12;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-tooltip.apexcharts-active {
+            opacity: 1;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-tooltip.apexcharts-theme-light {
+            border: 1px solid #e3e3e3;
+            background: rgba(255, 255, 255, 0.96);
+        }
+
+        .apexcharts-tooltip.apexcharts-theme-dark {
+            color: #fff;
+            background: rgba(30, 30, 30, 0.8);
+        }
+
+        .apexcharts-tooltip * {
+            font-family: inherit;
+        }
+
+        .apexcharts-tooltip-title {
+            padding: 6px;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+            background: #eceff1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .apexcharts-tooltip.apexcharts-theme-dark .apexcharts-tooltip-title {
+            background: rgba(0, 0, 0, 0.7);
+            border-bottom: 1px solid #333;
+        }
+
+        .apexcharts-tooltip-text-value,
+        .apexcharts-tooltip-text-z-value {
+            display: inline-block;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .apexcharts-tooltip-text-z-label:empty,
+        .apexcharts-tooltip-text-z-value:empty {
+            display: none;
+        }
+
+        .apexcharts-tooltip-text-value,
+        .apexcharts-tooltip-text-z-value {
+            font-weight: 600;
+        }
+
+        .apexcharts-tooltip-marker {
+            width: 12px;
+            height: 12px;
+            position: relative;
+            top: 0px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .apexcharts-tooltip-series-group {
+            padding: 0 10px;
+            display: none;
+            text-align: left;
+            justify-content: left;
+            align-items: center;
+        }
+
+        .apexcharts-tooltip-series-group.apexcharts-active .apexcharts-tooltip-marker {
+            opacity: 1;
+        }
+
+        .apexcharts-tooltip-series-group.apexcharts-active,
+        .apexcharts-tooltip-series-group:last-child {
+            padding-bottom: 4px;
+        }
+
+        .apexcharts-tooltip-series-group-hidden {
+            opacity: 0;
+            height: 0;
+            line-height: 0;
+            padding: 0 !important;
+        }
+
+        .apexcharts-tooltip-y-group {
+            padding: 6px 0 5px;
+        }
+
+        .apexcharts-tooltip-box,
+        .apexcharts-custom-tooltip {
+            padding: 4px 8px;
+        }
+
+        .apexcharts-tooltip-boxPlot {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .apexcharts-tooltip-box > div {
+            margin: 4px 0;
+        }
+
+        .apexcharts-tooltip-box span.value {
+            font-weight: bold;
+        }
+
+        .apexcharts-tooltip-rangebar {
+            padding: 5px 8px;
+        }
+
+        .apexcharts-tooltip-rangebar .category {
+            font-weight: 600;
+            color: #777;
+        }
+
+        .apexcharts-tooltip-rangebar .series-name {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .apexcharts-xaxistooltip {
+            opacity: 0;
+            padding: 9px 10px;
+            pointer-events: none;
+            color: #373d3f;
+            font-size: 13px;
+            text-align: center;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+            background: #eceff1;
+            border: 1px solid #90a4ae;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-xaxistooltip.apexcharts-theme-dark {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .apexcharts-xaxistooltip:after,
+        .apexcharts-xaxistooltip:before {
+            left: 50%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .apexcharts-xaxistooltip:after {
+            border-color: rgba(236, 239, 241, 0);
+            border-width: 6px;
+            margin-left: -6px;
+        }
+
+        .apexcharts-xaxistooltip:before {
+            border-color: rgba(144, 164, 174, 0);
+            border-width: 7px;
+            margin-left: -7px;
+        }
+
+        .apexcharts-xaxistooltip-bottom:after,
+        .apexcharts-xaxistooltip-bottom:before {
+            bottom: 100%;
+        }
+
+        .apexcharts-xaxistooltip-top:after,
+        .apexcharts-xaxistooltip-top:before {
+            top: 100%;
+        }
+
+        .apexcharts-xaxistooltip-bottom:after {
+            border-bottom-color: #eceff1;
+        }
+
+        .apexcharts-xaxistooltip-bottom:before {
+            border-bottom-color: #90a4ae;
+        }
+
+        .apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:after {
+            border-bottom-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:before {
+            border-bottom-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-xaxistooltip-top:after {
+            border-top-color: #eceff1;
+        }
+
+        .apexcharts-xaxistooltip-top:before {
+            border-top-color: #90a4ae;
+        }
+
+        .apexcharts-xaxistooltip-top.apexcharts-theme-dark:after {
+            border-top-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-xaxistooltip-top.apexcharts-theme-dark:before {
+            border-top-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-xaxistooltip.apexcharts-active {
+            opacity: 1;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-yaxistooltip {
+            opacity: 0;
+            padding: 4px 10px;
+            pointer-events: none;
+            color: #373d3f;
+            font-size: 13px;
+            text-align: center;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+            background: #eceff1;
+            border: 1px solid #90a4ae;
+        }
+
+        .apexcharts-yaxistooltip.apexcharts-theme-dark {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .apexcharts-yaxistooltip:after,
+        .apexcharts-yaxistooltip:before {
+            top: 50%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .apexcharts-yaxistooltip:after {
+            border-color: rgba(236, 239, 241, 0);
+            border-width: 6px;
+            margin-top: -6px;
+        }
+
+        .apexcharts-yaxistooltip:before {
+            border-color: rgba(144, 164, 174, 0);
+            border-width: 7px;
+            margin-top: -7px;
+        }
+
+        .apexcharts-yaxistooltip-left:after,
+        .apexcharts-yaxistooltip-left:before {
+            left: 100%;
+        }
+
+        .apexcharts-yaxistooltip-right:after,
+        .apexcharts-yaxistooltip-right:before {
+            right: 100%;
+        }
+
+        .apexcharts-yaxistooltip-left:after {
+            border-left-color: #eceff1;
+        }
+
+        .apexcharts-yaxistooltip-left:before {
+            border-left-color: #90a4ae;
+        }
+
+        .apexcharts-yaxistooltip-left.apexcharts-theme-dark:after {
+            border-left-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-yaxistooltip-left.apexcharts-theme-dark:before {
+            border-left-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-yaxistooltip-right:after {
+            border-right-color: #eceff1;
+        }
+
+        .apexcharts-yaxistooltip-right:before {
+            border-right-color: #90a4ae;
+        }
+
+        .apexcharts-yaxistooltip-right.apexcharts-theme-dark:after {
+            border-right-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-yaxistooltip-right.apexcharts-theme-dark:before {
+            border-right-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .apexcharts-yaxistooltip.apexcharts-active {
+            opacity: 1;
+        }
+
+        .apexcharts-yaxistooltip-hidden {
+            display: none;
+        }
+
+        .apexcharts-xcrosshairs,
+        .apexcharts-ycrosshairs {
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-xcrosshairs.apexcharts-active,
+        .apexcharts-ycrosshairs.apexcharts-active {
+            opacity: 1;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-ycrosshairs-hidden {
+            opacity: 0;
+        }
+
+        .apexcharts-selection-rect {
+            cursor: move;
+        }
+
+        .svg_select_boundingRect,
+        .svg_select_points_rot {
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .apexcharts-selection-rect + g .svg_select_boundingRect,
+        .apexcharts-selection-rect + g .svg_select_points_rot {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .apexcharts-selection-rect + g .svg_select_points_l,
+        .apexcharts-selection-rect + g .svg_select_points_r {
+            cursor: ew-resize;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .svg_select_points {
+            fill: #efefef;
+            stroke: #333;
+            rx: 2;
+        }
+
+        .apexcharts-svg.apexcharts-zoomable.hovering-zoom {
+            cursor: crosshair;
+        }
+
+        .apexcharts-svg.apexcharts-zoomable.hovering-pan {
+            cursor: move;
+        }
+
+        .apexcharts-zoom-icon,
+        .apexcharts-zoomin-icon,
+        .apexcharts-zoomout-icon,
+        .apexcharts-reset-icon,
+        .apexcharts-pan-icon,
+        .apexcharts-selection-icon,
+        .apexcharts-menu-icon,
+        .apexcharts-toolbar-custom-icon {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            line-height: 24px;
+            color: #6e8192;
+            text-align: center;
+        }
+
+        .apexcharts-zoom-icon svg,
+        .apexcharts-zoomin-icon svg,
+        .apexcharts-zoomout-icon svg,
+        .apexcharts-reset-icon svg,
+        .apexcharts-menu-icon svg {
+            fill: #6e8192;
+        }
+
+        .apexcharts-selection-icon svg {
+            fill: #444;
+            transform: scale(0.76);
+        }
+
+        .apexcharts-theme-dark .apexcharts-zoom-icon svg,
+        .apexcharts-theme-dark .apexcharts-zoomin-icon svg,
+        .apexcharts-theme-dark .apexcharts-zoomout-icon svg,
+        .apexcharts-theme-dark .apexcharts-reset-icon svg,
+        .apexcharts-theme-dark .apexcharts-pan-icon svg,
+        .apexcharts-theme-dark .apexcharts-selection-icon svg,
+        .apexcharts-theme-dark .apexcharts-menu-icon svg,
+        .apexcharts-theme-dark .apexcharts-toolbar-custom-icon svg {
+            fill: #f3f4f5;
+        }
+
+        .apexcharts-canvas .apexcharts-zoom-icon.apexcharts-selected svg,
+        .apexcharts-canvas .apexcharts-selection-icon.apexcharts-selected svg,
+        .apexcharts-canvas .apexcharts-reset-zoom-icon.apexcharts-selected svg {
+            fill: #008ffb;
+        }
+
+        .apexcharts-theme-light .apexcharts-selection-icon:not(.apexcharts-selected):hover svg,
+        .apexcharts-theme-light .apexcharts-zoom-icon:not(.apexcharts-selected):hover svg,
+        .apexcharts-theme-light .apexcharts-zoomin-icon:hover svg,
+        .apexcharts-theme-light .apexcharts-zoomout-icon:hover svg,
+        .apexcharts-theme-light .apexcharts-reset-icon:hover svg,
+        .apexcharts-theme-light .apexcharts-menu-icon:hover svg {
+            fill: #333;
+        }
+
+        .apexcharts-selection-icon,
+        .apexcharts-menu-icon {
+            position: relative;
+        }
+
+        .apexcharts-reset-icon {
+            margin-left: 5px;
+        }
+
+        .apexcharts-zoom-icon,
+        .apexcharts-reset-icon,
+        .apexcharts-menu-icon {
+            transform: scale(0.85);
+        }
+
+        .apexcharts-zoomin-icon,
+        .apexcharts-zoomout-icon {
+            transform: scale(0.7);
+        }
+
+        .apexcharts-zoomout-icon {
+            margin-right: 3px;
+        }
+
+        .apexcharts-pan-icon {
+            transform: scale(0.62);
+            position: relative;
+            left: 1px;
+            top: 0px;
+        }
+
+        .apexcharts-pan-icon svg {
+            fill: #fff;
+            stroke: #6e8192;
+            stroke-width: 2;
+        }
+
+        .apexcharts-pan-icon.apexcharts-selected svg {
+            stroke: #008ffb;
+        }
+
+        .apexcharts-pan-icon:not(.apexcharts-selected):hover svg {
+            stroke: #333;
+        }
+
+        .apexcharts-toolbar {
+            position: absolute;
+            z-index: 11;
+            max-width: 176px;
+            text-align: right;
+            border-radius: 3px;
+            padding: 0px 6px 2px 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .apexcharts-menu {
+            background: #fff;
+            position: absolute;
+            top: 100%;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 3px;
+            right: 10px;
+            opacity: 0;
+            min-width: 110px;
+            transition: 0.15s ease all;
+            pointer-events: none;
+        }
+
+        .apexcharts-menu.apexcharts-menu-open {
+            opacity: 1;
+            pointer-events: all;
+            transition: 0.15s ease all;
+        }
+
+        .apexcharts-menu-item {
+            padding: 6px 7px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .apexcharts-theme-light .apexcharts-menu-item:hover {
+            background: #eee;
+        }
+
+        .apexcharts-theme-dark .apexcharts-menu {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+
+        @media screen and (min-width: 768px) {
+            .apexcharts-canvas:hover .apexcharts-toolbar {
+                opacity: 1;
+            }
+        }
+
+        .apexcharts-datalabel.apexcharts-element-hidden {
+            opacity: 0;
+        }
+
+        .apexcharts-pie-label,
+        .apexcharts-datalabels,
+        .apexcharts-datalabel,
+        .apexcharts-datalabel-label,
+        .apexcharts-datalabel-value {
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .apexcharts-pie-label-delay {
+            opacity: 0;
+            animation-name: opaque;
+            animation-duration: 0.3s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease;
+        }
+
+        .apexcharts-canvas .apexcharts-element-hidden {
+            opacity: 0;
+        }
+
+        .apexcharts-hide .apexcharts-series-points {
+            opacity: 0;
+        }
+
+        .apexcharts-gridline,
+        .apexcharts-annotation-rect,
+        .apexcharts-tooltip .apexcharts-marker,
+        .apexcharts-area-series .apexcharts-area,
+        .apexcharts-line,
+        .apexcharts-zoom-rect,
+        .apexcharts-toolbar svg,
+        .apexcharts-area-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+        .apexcharts-line-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+        .apexcharts-radar-series path,
+        .apexcharts-radar-series polygon {
+            pointer-events: none;
+        }
+
+        /* markers */
+
+        .apexcharts-marker {
+            transition: 0.15s ease all;
+        }
+
+        @keyframes opaque {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Resize generated styles */
+
+        @keyframes resizeanim {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .resize-triggers {
+            animation: 1ms resizeanim;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .resize-triggers,
+        .resize-triggers > div,
+        .contract-trigger:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .resize-triggers > div {
+            background: #eee;
+            overflow: auto;
+        }
+
+        .contract-trigger:before {
+            width: 200%;
+            height: 200%;
+        }
+    </style>
+    <style type="text/css">
+        /* Chart.js */
+        /*
+     * DOM element rendering detection
+     * https://davidwalsh.name/detect-node-insertion
+     */
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 0.001s;
+        }
+
+        /*
+     * DOM element resizing detection
+     * https://github.com/marcj/css-element-queries
+     */
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1;
+        }
+
+        .chartjs-size-monitor-expand > div {
+            position: absolute;
+            width: 1000000px;
+            height: 1000000px;
+            left: 0;
+            top: 0;
+        }
+
+        .chartjs-size-monitor-shrink > div {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: 0;
+            top: 0;
+        }
+
+        .block ul li {
+            position: relative;
+            margin-left: 30px;
+            margin-bottom: 20px;
+            color: #869ab8;
+        }
+
+        .block ul li::after {
+            position: absolute;
+            content: "";
+            background: #aeaed5;
+            width: 12px;
+            height: 12px;
+            left: -30px;
+            top: 6px;
+            border-radius: 50px;
+        }
+    </style>
+    <!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = '{{key}}';
+window.smartsupp||(function(d) {
+  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+  c.type='text/javascript';c.charset='utf-8';c.async=true;
+  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);
+</script>
+{% endblock head %}
+
+{% block content %}
+    <body>
+    <div id="app">
+        <div>
+            <header class="header bg-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="navigation">
+                                <nav class="navbar navbar-expand-lg navbar-light">
+                                    <h1 class="logo mr-auto"><a href="/">Bit<span>Vest</span></a></h1>
+                                    <a href="/login/" class="nb-t nav-link btn btn-primary btn-sm text-white">Sign In</a>
+                                    <div id="navbarScroll" class="justify-content-end navbar-collapse collapse"
+                                         style="display: none;">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item " tag="li" id="__BVID__12">
+                                                <a role="button" aria-haspopup="true" aria-expanded="false" href="/"
+                                                   target="_self" class="nav-link" id="__BVID__12__BV_toggle_"><span>Home</span></a>
+
+                                            </li>
+                                            <li class="nav-item b-nav-dropdown dropdown tradix_dropdown" tag="li"
+                                                id="__BVID__18">
+                                                <a role="button" aria-haspopup="true" aria-expanded="false" href="#"
+                                                   target="_self" class="nav-link dropdown-toggle"
+                                                   id="__BVID__18__BV_toggle_"><span>Company</span></a>
+                                                <ul tabindex="-1" class="dropdown-menu"
+                                                    aria-labelledby="__BVID__18__BV_toggle_">
+                                                    <a href="/about" class="dropdown-item ">About us</a>
+                                                </ul>
+                                            </li>
+                                            <li class="nav-item b-nav-dropdown dropdown tradix_dropdown" tag="li"
+                                                id="__BVID__25">
+                                                <a role="button" aria-haspopup="true" aria-expanded="false" href="#"
+                                                   target="_self" class="nav-link active dropdown-toggle"
+                                                   id="__BVID__25__BV_toggle_"><span>Support</span></a>
+                                                <ul tabindex="-1" class="dropdown-menu"
+                                                    aria-labelledby="__BVID__25__BV_toggle_">
+                                                    <a href="/#contact" class="dropdown-item">Contact us</a>
+                                                    <a href="/terms" class="dropdown-item">Terms of service</a>
+                                                </ul>
+                                            </li>
+                                            <li class="nav-item mt-3 mt-lg-0"><a href="/login/"
+                                                                                 class="nav-link btn btn-primary btn-sm text-white">Sign
+                                                In</a></li>
+                                            <li class="nav-item mt-3 mt-lg-0"><a href="/register/"
+                                                                                 class="nav-link btn btn-primary btn-sm text-white">Register</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <section class="content section-padding">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-9">
+                            <div class="block">
+                                {% if terms %}
+
+                                    {% autoescape off %} {{ terms }}{% endautoescape %}
+                                {% else %}
+
+                                    <h1>USER AGREEMENT</h1>
+                                    <p>
+                                        THANK YOU FOR CHOOSING bitvest.eu (the "Site").
+                                    </p>
+                                    <br>
+                                    <p>
+                                        This User Agreement is an electronic agreement between you (the “User”) and
+                                        BitVest Finance LLP, a company registered and operating according to the laws of
+                                        England and Wales, Company number OC393265, with the registered address 110
+                                        Bishopsgate, London EC2N 4AD, UK (the BitVest) that applies to your use of this
+                                        website, all services, products and content provided by BitVest.
+                                    </p>
+                                    <br>
+                                    <p>
+                                        The text of this Agreement permanently located at https://bitvest.eu/terms
+                                        contains all the essential conditions of the public offer of BitVest. By
+                                        creating an account on the Site or by using any of the Services, you acknowledge
+                                        that you have read, understand, and completely agree to this Agreement in effect
+                                        from time to time.
+                                    </p>
+                                    <br>
+                                    <h3>THE PRESENT OFFER IS CONSIDERED TO HAVE BEEN ACCEPTED PROPERLY IF THE USER
+                                        FOLLOWS THE STEPS LISTED BELOW:</h3>
+                                    <ul class="bullet-list">
+                                        <li>GET FAMILIARIZED WITH THE CONDITIONS OF THIS USER AGREEMENT AND ALL ITS
+                                            SUPPLEMENTS;
+                                        </li>
+                                        <li>INTRODUCE REAL AND ACTUAL INFORMATION INCLUDING AUTHENTIC LOGIN, EMAIL AND
+                                            PASSWORD AS WELL AS ENTER THE CAPTCHA CODE INTO THE REGISTRATION FORM IN THE
+                                            ‘REGISTER’ TAB LOCATED AT https://bitvest.eu;
+                                        </li>
+                                        <li>PUT THE REQUIRED SYMBOL IN THE SPECIAL BOX BELOW THE TITLE ‘I ACCEPT THE
+                                            CONDITIONS OF THE AGREEMENT’ IN THE REGISTRATION FORM;
+                                        </li>
+                                        <li>PRESS THE ‘CONTINUE’ BUTTON AFTER FILLING THE REGISTRATION FORM.</li>
+                                        <li>AFTER THE USER PRESSES THE ‘CONTINUE’ BUTTON AND SEE APPEARED THE SPECIAL
+                                            MESSAGE INFORMING ABOUT THE SUCCESSFUL REGISTRATION, THE REGISTRATION
+                                            PROCESS IS CONSIDERED COMPLETED AND THE CONDITIONS OF THE PRESENT USER
+                                            AGREEMENT BECOME OBLIGATORY TO ABIDE FOR THE REGISTERED PERSON.
+                                        </li>
+                                    </ul>
+                                    </div>
+                                    <div class="block">
+                                        <h3>1. TERMS AND DEFINITIONS</h3>
+                                        <h5>In the present Agreement the following terms have the meaning indicated
+                                            below, unless otherwise is stipulated:</h5><br>
+                                        <p>
+                                            1.1. Agreement means the present User Agreement.
+                                        </p>
+                                        <p>1.2. Account means functional part of the System that controls Users Funds
+                                            and operations conducted with them.</p>
+                                        <p>1.3. Chat means the System's function intended for instant messaging between
+                                            the Users.</p>
+                                        <p>1.4. Cryptocurrency means peer-to-peer digital currency that has no central
+                                            issuer and is distributed directly between the owners of such currency.</p>
+                                        <p>1.5. Deal means agreement on onerous alienation of rights on Cryptocurrency
+                                            concluded between the Users of bitvest.eu.</p>
+                                        <p>1.6. Deposit means a transaction involving a transfer of Funds to the
+                                            Account.</p>
+                                        <p>1.7. BitVest is BitVest Finance LLP, a legal entity registered according to
+                                            the law of UK, with the registration number OC393265 of the 19th of May,
+                                            2014 , with registered address at 110 Bishopsgate, London EC2N 4AD, UK
+                                            including but not limited by employees, officers, directors and
+                                            shareholders, affiliated persons of BitVest Finance LLP. Depending on the
+                                            context BitVest also may mean services, products, web-sites, content and
+                                            other materials, provided by BitVest.</p>
+                                        <p>1.8. Fiat money means government-issued currency, that is designated as legal
+                                            tender in its country of issuance on the legislative level.</p>
+                                        <p>1.9. Funds means Fiat money and Cryptocurrency used during the execution of
+                                            Deals.</p>
+                                        <p>1.10. Margin Deal means deal executed with the use of the Funds provided by
+                                            to the Client in returned and refundable use.</p>
+                                        <p>1.11. Margin Level means the amount of Funds in the User Account necessary
+                                            for execution of a Margin Deal expressed in a percentage ratio to the amount
+                                            of Funds provided to the User.</p>
+                                        <p>1.12. Order means User's offer to close a Deal on certain conditions.</p>
+                                        <p>1.13. Parties means BitVest and the User.</p>
+                                        <p>1.14. Personal Cabinet means set of protected pages created as a result of
+                                            the User registration in the System, using which the User can to place
+                                            Orders for further execution of Deals as well as instruct the BitVest
+                                            commissions stipulated by the present Agreement. The Personal Cabinet
+                                            reflects information about placed and cancelled Orders, closed Deals,
+                                            available funds and/or Cryptocurrency and other information determined by
+                                            the functions of the Site.</p>
+                                        <p>1.15. Site means set of information, texts, graphic and design elements,
+                                            pictures, photo, video and other fruits of intellectual activity, as well as
+                                            set of computer programs contained in the information system which ensures
+                                            the accessibility of this information at https://bitvest.eu.</p>
+                                        <p>1.16. Services mean all and any service provided by BitVest.</p>
+                                        <p>1.17. System means set of software and technical means used by the BitVest in
+                                            automatic mode to process operations conducted by the User in his/her
+                                            Personal Cabinet.</p>
+                                        <p>1.18. User means ?apable under personal law natural person or business entity
+                                            formatted in the appropriate legal form according to local legislation that
+                                            use the Site and/or the System and has concluded the corresponding Agreement
+                                            with BitVest.</p>
+                                        <p>1.19. User Account Data means User Data necessary to access and use the
+                                            System login, password, email and other data indicated during the
+                                            registration process as well as after it.</p>
+                                        <p>1.20. Withdrawal means a transaction involving a transfer of Funds from the
+                                            Users Account.</p>
+                                        <p>1.21. Stopout - forced closure of trading position at a market price, in
+                                            order to protect the financial interests of participants in the Marginal
+                                            Deal from the negative balance of the Account.</p>
+                                        <p>1.22. Leverage is the ratio of the User's own funds to the volume of trading
+                                            operations that it can perform at the expense of the Funds granted to it
+                                            under a Loan agreement. The rest of terms and definitions that can be found
+                                            in the text of the Agreement should be interpreted by the Parties according
+                                            to the legislation of the UK and to the general rules of interpretation of
+                                            such terms accepted in the Internet network. The titles of different
+                                            sections (articles) of the Agreement have been put with the only objective
+                                            to make the text more comfortable for the reader and do not have any literal
+                                            legal effect.</p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>2. SUBJECT OF THE AGREEMENT</h3>
+                                        <p>2.1. Under the Agreement BitVest renders to the User the following
+                                            services:</p>
+                                        <ul class="bullet-list">
+                                            <li>grants access to the System in order to carry out Deals;</li>
+                                            <li>grants access to the Account within the System;</li>
+                                            <li>gives the possibility to carry out Margin deals;</li>
+                                            <li>provides information necessary for the use of the System and carrying
+                                                out Deals.
+                                            </li>
+                                        </ul>
+                                        <p>2.2. Depending on the Users place of residence, the User may not be able to
+                                            use all the functions of the Site. It is the Users responsibility to follow
+                                            those rules and laws in his/her place of residence and/or place from which
+                                            the User accesses this Site.</p>
+                                        <p>2.3. The User acknowledges and agrees that, when completing Trading
+                                            Transactions, he/she is trading with other User, and that BitVest is not a
+                                            counterparty to any trade.</p>
+                                        <p>2.4. Essential parts of the present Agreement are sections dedicated to
+                                            Privacy policy, Anti-Money Laundering Policy, and the Fees.</p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>3. ACCESS TO THE SYSTEM, REGISTRATION PROCESS AND CHAT USE</h3>
+                                        <p>
+                                            3.1. BitVest grants the User access to the information about the System,
+                                            Currency Rates offered by other Users, closed Deals and about placed Orders
+                                            before the registration process is completed.
+                                        </p>
+                                        <p>3.2. In order to get access to the System, the User should complete the
+                                            registration process. After that the User will get access to the Personal
+                                            Cabinet created on the basis of the User Account Data.
+
+                                        </p>
+                                        <p>3.3. The User is responsible for setting up a password during the
+                                            registration process. The User can change the password any time after the
+                                            registration process is completed. The User commits to safeguard password
+                                            and User Account Data from the access of third parties and is the one to
+                                            determine the best way to save this data and take steps to prevent it from
+                                            being discredited. In case of loss or discrediting the password and/or the
+                                            User Account Data as well as in cases when third parties illegally obtain
+                                            access to the Users Personal Cabinet, the User has to inform the BitVest
+                                            about these circumstances by contacting the technical support team
+                                            (support@bitvest.com). Until BitVest receives the corresponding message, all
+                                            the actions made from the User Personal Cabinet will be considered as made
+                                            by the proper User as the holder of the Account.</p>
+                                        <p>3.4. The User has the right to hold and use only one Personal Cabinet and
+                                            cannot use two or more Personal Cabinets. Such actions will be considered as
+                                            violation of this Agreement.</p>
+                                        <p>3.5. The User gets access to the Chat after replenishing the Account with the
+                                            sum equal to or exceeding 500,00 (five hundred) USD regardless of the kind
+                                            of Funds. While using the Chat, the User is prohibited to:</p>
+                                        <ul class="bullet-list">
+                                            <li>insult and threaten other users and/or BitVest staff. This is considered
+                                                as a direct violation of the rules of chat use and may result in a
+                                                permanent ban of the User; - use any forms of obscene language;
+                                            </li>
+                                            <li>make statements stirring up to international dissention, containing
+                                                violence propaganda or offending religious feelings of other Users;
+                                                send any kind of external links;
+                                            </li>
+                                            <li>text messages in capital letters only;</li>
+                                            <li>repeatedly text the same information or constantly repeat the same
+                                                phrase;
+                                            </li>
+                                            <li>offer to buy or sell the Funds;</li>
+                                            <li>advertise products or services of other companies;</li>
+                                            <li>flood, spam and discuss topics that are not related to cryptocurrency or
+                                                the exchange;
+                                            </li>
+                                            <li>providing false or misleading information about exchange.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="block">
+                                        <h3>4. THE ACCOUNT</h3>
+                                        <p>
+                                            4.1. After registration in the System the User gets access to his/her
+                                            Account in the Personal Cabinet. The User can operate personally using
+                                            his/her Account and the Personal Cabinet as well as instruct the System to
+                                            execute operations with their Account automatically.
+                                        </p>
+                                        <p>
+                                            4.2. The <span class="name_site">BitVest</span> indicates in the Personal
+                                            Cabinet the information necessary for the replenishment of the Account and
+                                            for the withdrawal of Funds from the Account.
+                                        </p>
+                                        <p>
+                                            4.3. To replenish the Account the User has to transfer Funds according to
+                                            the bank details indicated by <span class="name_site">BitVest</span> in the
+                                            User Personal Cabinet. The User is responsible for paying commissions and
+                                            service fees related to the transfer as well as assumes the risks of
+                                            indicating an incorrect bank account details.
+                                        </p>
+                                        <p>
+                                            4.4. The Account is considered to be replenished when the corresponding
+                                            amount of money enters the current account of <span class="name_site">BitVest</span>
+                                            or when a corresponding message appears in the <span class="name_site">BitVest</span>
+                                            wallet about receiving not less than 6 (six) confirmations.
+                                        </p>
+                                        <p>
+                                            4.5. The <span class="name_site">BitVest</span> commits to receive
+                                            Cryptocurrency items from Users, keep them, keep a record of them, execute
+                                            transactions and provide them to the the Users upon their request.
+                                        </p>
+                                        <p>
+                                            4.6. The <span class="name_site">BitVest</span> keeps a record of the funds
+                                            transferred to the Account and does not keep Users money. Money transfers
+                                            during the Account replenishment as well while executing Deals between the
+                                            Users are carried out by third parties (aggregators, payment institutions
+                                            and other facilitators). The <span class="name_site">BitVest</span> is not
+                                            liable for actions of these third parties.
+                                        </p>
+                                        <p>
+                                            4.7. All Account operations are carried out at Users request. The <span
+                                                class="name_site">BitVest</span> does not accept orders on carrying out
+                                            any operation with the User Account from third persons except otherwise is
+                                            stipulated by the Agreement or other agreements between the Parties.
+                                        </p>
+                                        <p>
+                                            4.8. All the Funds placed on the Account belong to the User. The <span
+                                                class="name_site">BitVest</span> cannot block Funds on the Account
+                                            without the order emitted by the User as well as can write-off Funds only in
+                                            cases stipulated by the Agreement.
+                                        </p>
+                                        <p>
+                                            4.9. Interests do not apply to the remainder amount of Funds in the User
+                                            Account, and the <span class="name_site">BitVest</span> is not committed to
+                                            pay the abovementioned interests.
+                                        </p>
+                                        <p>
+                                            4.10. To withdraw Funds from the Account, the User has to fill the
+                                            corresponding form in their Personal Cabinet. The User will get a message to
+                                            the email address indicated during the registration process asking to
+                                            confirm or to deny the withdrawal operation. In case the User denies or does
+                                            not confirm the withdrawal, the Funds will remain in the Account, but it
+                                            will happens only after User fulfill all the conditions, which is written in
+                                            this Agreement.
+                                        </p>
+                                        <p>
+                                            4.11. The System sets some restrictions for Funds withdrawals and the User
+                                            cannot instigate withdraw Funds during 3 (three) days after changing User
+                                            Account Data, which includes changing or restoring password, and also
+                                            changing authorization method.
+                                        </p>
+                                        <p>
+                                            4.12. The User acknowledges and agrees that Deposit and Withdrawal
+                                            Transaction in Fiat currency may be delayed due to bank verifications and
+                                            checks, for a period up to one (1) month. Similarly and due to the inherent
+                                            nature of the cryptocurrency networks, the User acknowledges and agrees that
+                                            depositing and withdrawing Cryptocurrencies into/from his/her Account may
+                                            take between one (1) hour and seventy two (72) hours, barring unforeseen or
+                                            unavoidable network issues.
+                                        </p>
+                                        <p>
+                                            4.13. In case if the User discovers suspicious transaction activity,
+                                            including but not limited to unknown deposits and withdrawals, on his/her
+                                            Account that was not initiated by the User, the User shall immediately
+                                            notify <span class="name_site">BitVest</span> of this fact and follow the
+                                            instructions sent by <span class="name_site">BitVest</span>. Otherwise,
+                                            <span class="name_site">BitVest</span> reserves the right to freeze the
+                                            Account until the end of investigation.
+                                        </p>
+                                        <p>
+                                            4.14. <span class="name_site">BitVest</span> may be forced to cancel or
+                                            recall already executed Withdrawal Transaction at a request of financial
+                                            institutions, including but not limited to banks, which are involved in
+                                            settlement related to deposit and withdrawal of Funds from User`s Accounts.
+                                            In such cases the User is obliged to cooperate with <span class="name_site">BitVest</span>
+                                            in order to discover the reasons for such request.
+                                        </p>
+                                        <p>
+                                            4.15 If User want to buy premium account to use trading, he should be
+                                            noticed, that we take 2.5% fee from that deposit, which is maden for
+                                            purchasing a premium status for his account.
+                                        </p>
+                                        <p>
+                                            4.16 If registration term of User's account is less then 1 month, and he
+                                            received more than 15 BTC or the same value in other currencies - he should
+                                            buy VIP account. Until he make this purchasing his account should be limited
+                                            in withdrawing. Usual price of VIP account is 0.5 BTC or the same value in
+                                            other currencies.
+                                        </p>
+                                        <p>
+                                            4.17 Creating multi-account is forbidden. One User - one account. In case if
+                                            our system identify multi-account, account with less balance will be banned.
+                                            User should pay the penalty for creating multi-account. The amount of this
+                                            penalty is 0.05 BTC.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>5. TRADING DEALS</h3>
+                                        <p>
+                                            5.1. The Deals in the System are made on the basis of Orders placed by the
+                                            User and according to the conditions stipulated by the Parties, taking into
+                                            consideration the preliminary conditions of the agreement on onerous
+                                            alienation of rights to Cryptocurrency. The <span
+                                                class="name_site">BitVest</span> in no circumstances should be
+                                            considered the dealing party. All the Deals are conducted between the Users
+                                            on the information support of the <span class="name_site">BitVest</span>.
+                                        </p>
+                                        <p>
+                                            5.2. The User recognizes that an Order shall only be submitted after careful
+                                            consideration and understands and accepts consequences of its execution.
+                                        </p>
+                                        <p>
+                                            5.3. The <span class="name_site">BitVest</span> charges reward for the
+                                            execution of Deals. The commission rewards are determined by the Fees.
+                                        </p>
+                                        <p>
+                                            5.4. To place an Order The User has to replenish the Account for the amount
+                                            indicated in the Order and fill the corresponding form in the page Trades or
+                                            Exchange depending on the Order type that can be consulted in the section 6
+                                            of the present Agreement.
+                                        </p>
+                                        <p>
+                                            5.5. The Users Order is registered in the System after verifying the
+                                            availability of required amount of Funds on the Account. The <span
+                                                class="name_site">BitVest</span> controls the possibility of Users to
+                                            carry out transactions and by this strengthens confidence between the Users
+                                            and reduces the risk of non-execution of Users obligations under the Deals.
+                                            The System does not register the Order if the Account does not have enough
+                                            Funds for conducting the Deal.
+                                        </p>
+                                        <p>
+                                            5.6. User cannot place more than 20 (twenty) Orders at the same time. The
+                                            System does not register Orders that exceed the indicated amount.
+                                        </p>
+                                        <p>
+                                            5.7. The User can call back the Order at any moment until its full
+                                            execution.
+                                        </p>
+                                        <p>
+                                            5.8. All the Users can consult an Order until it is fully executed or called
+                                            back. Placed Order represents a Users proposal to close a Deal.
+                                        </p>
+                                        <p>
+                                            5.9. The Deal on the placed Order is closed when the System registers a
+                                            Counter Order placed by another User. Counter Orders are reverse orders that
+                                            have the same Exchange Rate. The registration of counter orders in the
+                                            System is considered the Users acceptance of the offer. The Order is
+                                            considered executed at the moment of the counter order registration in the
+                                            System.
+                                        </p>
+                                        <p>
+                                            5.10. Order can be executed partially. If this happens the System will place
+                                            another Order for the amount of unencumbered balance of the originally
+                                            placed Order.
+                                        </p>
+                                        <p>
+                                            5.11. The execution of the Order is realized by transferring the
+                                            corresponding Funds indicated in counter orders to Users Accounts. Transfer
+                                            of these Funds is made automatically by the System. Herewith the actions
+                                            realized by the System are considered to have been realized at Users
+                                            request.
+                                        </p>
+                                        <p>
+                                            5.12. Such actions as placing Orders, calling them back and closing the
+                                            Deals are reflected in the User Personal Cabinet.
+                                        </p>
+                                        <p>
+                                            5.13. The information about the closed Deals is available for all the Users
+                                            during a period of time determined by the <span
+                                                class="name_site">BitVest</span>.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>6. TYPES OF ORDERS</h3>
+                                        <p>
+                                            <b>6.1. Simple buy order</b>
+                                        </p>
+                                        <p>
+                                            6.1.1. A simple buy Order represents the Users offer to buy a certain amount
+                                            of Funds at the Exchange Rate set by the User.
+                                        </p>
+                                        <p>
+                                            6.1.2. To place a simple buy Order the User has to fill the corresponding
+                                            form in the Personal Cabinet indicating the amount of Funds to buy and
+                                            setting the Exchange Rate.
+                                        </p>
+                                        <p>
+                                            6.1.3. A simple buy Order can be executed at a lower Exchange Rate than the
+                                            one indicated in the placed Order. Herewith the User will be refunded with
+                                            the excessively paid part of the commission. A simple buy Order cannot be
+                                            executed at a higher Exchange Rate than the one indicated in the placed
+                                            Order.
+                                        </p>
+                                        <p>
+                                            <b>6.2. Simple sell Order</b>
+                                        </p>
+                                        <p>
+                                            6.2.1. A simple sell Order represents the Users offer to sell a certain
+                                            amount of Funds at the Exchange Rate set by the User.
+                                        </p>
+                                        <p>
+                                            6.2.2. To place a simple sell Order the User has to fill the corresponding
+                                            form in the Personal Cabinet indicating the amount of Funds to sell and
+                                            setting the Exchange Rate.
+                                        </p>
+                                        <p>
+                                            6.2.3. When placing a simple sell Order the User has the possibility to use
+                                            additional functions of the System like Stop Loss or Trailing Stop. Marking
+                                            a special box opposite the corresponding field in the form for placing a
+                                            simple sell Order is considered the ground for using these functions.
+                                        </p>
+                                        <p>
+                                            6.2.4. To use Stop Limit the User has to indicate in the form the minimum
+                                            price at which the Order can be executed. If the System Exchange Rate falls
+                                            the placed Order will be executed when reaches the value indicated by the
+                                            User in the box Stop Loss.
+                                        </p>
+                                        <p>
+                                            6.2.5. To use Trailing Stop the User has to indicate in the form the amount
+                                            of Funds to sell as well as Trailing Stop and Stop Limit values. The Funds
+                                            will be offered for sale at a highest current Exchange Rate determined by
+                                            the System. If the System Exchange Rate starts to raise and will increment
+                                            by the value indicated in the box Trailing Stop, the Exchange Rate for the
+                                            Order placed by the User will increment by a corresponding amount. Herewith
+                                            Stop Loss index will increment by the amount indicated in the box Trailing
+                                            Stop.
+                                        </p>
+                                        <p>
+                                            <b>6.3. Market buy Order</b>
+                                        </p>
+                                        <p>
+                                            6.3.1. A market buy Order represents the Users offer to buy a certain amount
+                                            of Funds without setting the Exchange Rate.
+                                        </p>
+                                        <p>
+                                            6.3.2. To place a market buy Order the User has to fill the corresponding
+                                            form in the Personal Cabinet indicating the amount of Funds to buy.
+                                        </p>
+                                        <p>
+                                            6.3.3. The Order will be executed at the lowest Exchange Rate found among
+                                            the Orders placed by other Users.
+                                        </p>
+                                        <p>
+                                            6.3.4. The <span class="name_site">BitVest</span> reward for the operation
+                                            will be charged immediately at the moment of Deal closure.
+                                        </p>
+                                        <p>
+                                            <b>6.4. Market sell Order</b>
+                                        </p>
+                                        <p>
+                                            6.4.1. A market sell Order represents the Users offer to sell a certain
+                                            amount of Funds without setting the Exchange Rate.
+                                        </p>
+                                        <p>
+                                            6.4.2. To place a market sell Order the User has to fill the corresponding
+                                            form in the Personal Cabinet indicating the amount of Funds to sell.
+                                        </p>
+                                        <p>
+                                            6.4.3. The Order will be executed at the highest Exchange Rate found among
+                                            the Orders placed by other Users.
+                                        </p>
+                                        <p>
+                                            6.4.4. The <span class="name_site">BitVest</span> reward for the operation
+                                            will be charged immediately at the moment of Deal closure.
+                                        </p>
+                                        <p>
+                                            <b>6.5. Complex buy and sell Order</b>
+                                        </p>
+                                        <p>
+                                            6.5.1. A complex buy and sell Order represents the Users offer to buy a
+                                            certain amount of Funds at the Exchange Rate set by the User and to sell the
+                                            acquired amount of Funds at the Exchange Rate set by the User. So, when the
+                                            User places a complex buy and sell Order, the System in its turn places
+                                            firstly a simple buy Order and when it is executed, places a simple sell
+                                            Order.
+                                        </p>
+                                        <p>
+                                            6.5.2. To place a complex buy and sell Order the User has to fill the
+                                            corresponding form in the Personal Cabinet indicating the amount of Funds to
+                                            buy and setting the Exchange Rate as well as setting the Exchange Rate to be
+                                            used during the sale of the acquired Funds.
+                                        </p>
+                                        <p>
+                                            6.5.3. This type of Order is governed by a set of rules elaborated for
+                                            simple buy Order and simple sell Order with specificities related to complex
+                                            buy and sell Order.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>
+                                            7. MARGIN DEALS
+                                        </h3>
+                                        <p>
+                                            7.1. In certain cases stipulated by the Agreement the <span
+                                                class="name_site">BitVest</span> gives the User a possibility to make a
+                                            Margin Deal.
+                                        </p>
+                                        <p>
+                                            <b>7.2. It is possible to make a Margin Deal using the following Order
+                                                types:</b>
+                                        </p>
+                                        <p>
+                                            7.2.1. Simple sell Order;
+                                        </p>
+                                        <p>
+                                            7.2.2. Simple buy Order;
+                                        </p>
+                                        <p>
+                                            7.2.3. Complex buy and sell Order but only during the purchase phase.
+                                        </p>
+                                        <p>
+                                            7.3. Providing of any actions envisaged by the System's functionality aimed
+                                            at concluding a Marginal Deal (marking in the "Loan"/ "Take a Loan" field,
+                                            etc.) means the User's consent to the conditions for the implementation of
+                                            Marginal Transactions.
+                                        </p>
+                                        <p>
+                                            7.4. The loan agreement is considered concluded from the moment of crediting
+                                            of Funds to the Account of the User.
+                                        </p>
+                                        <p>
+                                            7.5. The funds are provided to Users on a refundable and onerous basis.
+                                        </p>
+                                        <p>
+                                            7.6. The User should have the necessary margin Level on their Account in
+                                            order to make a Margin Deal.
+                                        </p>
+                                        <p>
+                                            7.7. Margin Level amounts to 100% (one hundred percent) of the amount of
+                                            provided Funds for the Margin Deal. Margin Level can be changed at the
+                                            agreement with the <span class="name_site">BitVest</span> but cannot be
+                                            lower than 25% (twenty five percent) of the amount of provided Funds.
+                                        </p>
+                                        <p>
+                                            7.8. In case the Margin Deal is closed on the parameters set by the User in
+                                            the placed Order, the System writes off the User Account the amount of Funds
+                                            equivalent to the amount of Funds provided on the basis of loan agreement as
+                                            well as the corresponding commission. The amount of commission is determined
+                                            by the Fees.
+                                        </p>
+                                        <p>
+                                            7.9. In case the User acquires a debt as a result of making a Margin Deal,
+                                            the <span class="name_site">BitVest</span> has the right to restrict the use
+                                            of Personal Cabinet until the User replenishes his/her Account for a sum
+                                            equivalent to the amount of the debt. Herewith the User is obliged to
+                                            replenish the corresponding Account during 5 (five) working days from the
+                                            moment of acquiring these liabilities.
+                                        </p>
+                                        <p>
+                                            7.10. In case of risk that the Margin Level on the User Account can result
+                                            insufficient, the <span class="name_site">BitVest</span> has the right, at
+                                            sole discretion and without previously notifying the User, to decide on the
+                                            immediate execution of the Order or call it back. The above mentioned
+                                            actions are not considered as a violation of obligations on behalf of the
+                                            <span class="name_site">BitVest</span>.
+                                        </p>
+                                        <p>
+                                            7.11. The User agrees that <span class="name_site">BitVest</span> has the
+                                            right to execute a stop-loss at a Margin Level of less than 30% at a 1: 2
+                                            leverage, and this action is not a violation of the obligations of <span
+                                                class="name_site">BitVest</span>.
+                                        </p>
+                                        <p>
+                                            7.12. Tracking changes in the conditions for execution of Marginal
+                                            transactions and compliance with the performance of margin requirements is a
+                                            direct duty of the client. <span class="name_site">BitVest</span> is not
+                                            liable for any losses that may result from a lack of information or untimely
+                                            disclosure of the margin requirement. <span class="name_site">BitVest</span>
+                                            does not have to inform the User in any way about the execution of the
+                                            stop-loss (s), or about the sale or liquidation of the User's Funds from his
+                                            Account in the System, if such account is not replenished as a result of
+                                            arrears.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>
+                                            8. DETECTION AND PREVENTION OF ILLEGAL SITE AND SYSTEM USE
+                                        </h3>
+                                        <p>
+                                            8.1. The User is prohibited to conduct Deals omitting the formal procedure
+                                            of placing Orders by means of using personal messages and other options of
+                                            the Site and/or the System. In these cases a message ceases to be private
+                                            and becomes available for moderators and the administration if one of chat
+                                            users complaints about it.
+                                        </p>
+                                        <p>
+                                            8.2. The User is prohibited to use the Site and/or the System in any other
+                                            way than those stipulated in the Agreement; in particular, the User is not
+                                            allowed to advertise products on the Site in case the Parties have not
+                                            entered an additional specific agreement.
+                                        </p>
+                                        <p>
+                                            8.3. The User is prohibited to use the Site and/or the System with unlawful
+                                            aims including laundering of money derived from criminal activity, financing
+                                            of terrorism and involvement in extremist activity.
+                                        </p>
+                                        <p>
+                                            8.4. The User is obliged to go through the identification process
+                                            established by the System or third parties (aggregators, credit or other
+                                            organs) during the Deal-making process as well as fulfill the requirements
+                                            stipulated by UK law in the field of counteraction of laundering
+                                            (legitimization) proceeds of crime.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>9. RISK WARNING</h3>
+                                        <p>
+                                            9.1. The User guarantees that he/she understands general principles of work
+                                            with Cryptocurrencies and is aware of Cryptocurrency of the following
+                                            characteristics affecting its value and risks related to it:
+                                        </p>
+                                        <ul class="bullet-list">
+                                            <li>Price volatility: The value of cryptocurrencies is extremely volatile.
+                                                They are vulnerable to sharp changes in price due to unexpected events
+                                                or changes in market sentiment.
+                                            </li>
+                                            <li>Leverage: Leverage multiplies Users profits but also potential losses
+                                                and can have a significant impact on fees. It also places User at risk
+                                                of losing more than his/her initial investment.
+                                            </li>
+                                            <li>Charges and funding costs: Charges and Fees can include the spread,
+                                                funding charges, and commissions.
+                                            </li>
+                                            <li>Price transparency: When compared with fiat currencies, there can be
+                                                more significant variations in the pricing of cryptocurrencies used to
+                                                determine the value of Users position. There is a greater risk that the
+                                                User will not receive a fair and accurate price for the underlying
+                                                cryptocurrency when trading.
+                                            </li>
+                                        </ul>
+                                        <p></p>
+                                        <p>
+                                            9.2. User should only participate in trading deals if he/she has a
+                                            sophisticated knowledge of financial markets and fully understands the risks
+                                            associated with cryptocurrencies.
+                                        </p>
+                                        <p>
+                                            9.3. The User guarantees that he/she has a right to execute transactions
+                                            with Cryptocurrency and possesses a full legal capacity.
+                                        </p>
+                                        <p>
+                                            9.4. The User understands that the <span class="name_site">BitVest</span> in
+                                            no way influences the Exchange Rate set by the Users, does not give
+                                            recommendations on Exchange Rate determination and does not forecast the
+                                            rates. The User is responsible for all economic risks related to choosing
+                                            particular Exchange Rate. The <span class="name_site">BitVest</span> does
+                                            not guarantee that the Deal will be finally closed and that the conditions
+                                            of this Deal will be of the Users benefit.
+                                        </p>
+                                        <p>
+                                            9.5. The User understands that the <span class="name_site">BitVest</span> in
+                                            no way bears relation to deal conduction and/or transactions related to
+                                            Cryptocurrency. Correspondingly the <span class="name_site">BitVest</span>
+                                            does not assume the responsibility to guarantee terms and/or possibilities
+                                            of carrying out this or that operation and/or transaction related to
+                                            Cryptocurrency, which are necessary for Deal making.
+                                        </p>
+                                        <p>
+                                            9.6. The User understands that all the operations with Cryptocurrency have
+                                            irreversible character and that Funds acquired during the Deal can be
+                                            returned only on the basis of additional specific agreement with other User.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>10. INTELLECTUAL PROPERTY AND RESTRICTIONS ON SITE AND SYSTEM USE</h3>
+                                        <p>
+                                            10.1. The Site and the System contain fruits of intellectual labor that
+                                            belong to the <span class="name_site">BitVest</span>, affiliated persons and
+                                            other related parties, sponsors, partners, representatives, all the parties
+                                            acting on behalf of the <span class="name_site">BitVest</span> and other
+                                            third parties.
+                                        </p>
+                                        <p>
+                                            10.2. By using the Site and the System the User acknowledges and agrees that
+                                            all Site content and the structure of Site content are protected by
+                                            copyright, trademark and other rights concerning the results of intellectual
+                                            activity, and that the abovementioned rights are authentic and are protected
+                                            in their every form, in all carriers and regarding all existing and created
+                                            later technologies. No rights as well as no Site nor System content are
+                                            committed to the User as a result of Site and System use or on the
+                                            conclusion of the Agreement.
+                                        </p>
+                                        <p>
+                                            10.3. To avoid any misunderstanding the User is prohibited to:
+                                        </p>
+                                        <ul class="bullet-list">
+                                            <li>copy and/or diffuse any items of intellectual property published on the
+                                                Site and/or in the System except when this function is clearly
+                                                contemplated by the Site and/or the System;
+                                            </li>
+                                            <li>copy or use in any other way the program part of the Site and/or the
+                                                System as well as its design;
+                                            </li>
+                                            <li>diffuse on the Site and/or in the System personal data of third persons
+                                                without their permission;
+                                            </li>
+                                            <li>change in any way the program part of the Site and/or the System, take
+                                                any actions aimed at changing the functionality and operability of the
+                                                Site and/or the System;
+                                            </li>
+                                            <li>use insults or any words violating rights and liberties of third persons
+                                                as a login (nickname, alias) during the registration.
+                                            </li>
+                                        </ul>
+                                        <p></p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>11. RESPONSIBILITIES OF THE PARTIES</h3>
+                                        <p>
+                                            11.1. In case the User violates the conditions of the present Agreement, the
+                                            legislation of the UK, morality norms or in case he/she conspires with
+                                            another User to violate the conditions of the Agreement, the <span
+                                                class="name_site">BitVest</span> will have the right to block or delete
+                                            the Users Personal Cabinet, prohibit or restrict their access to certain or
+                                            all functions of the System using his/her Personal Cabinet.
+                                        </p>
+                                        <p>
+                                            11.2. In case the User violates the terms of the return of Funds provided
+                                            under the Marginal Deal, <span class="name_site">BitVest</span> is entitled
+                                            to demand from the User payment of a penalty amounted to 1% (one percent) of
+                                            the Funds provided to the User for each day of delay.
+                                        </p>
+                                        <p>
+                                            11.3. If the <span class="name_site">BitVest</span> detects that the User
+                                            has violated paragraph 8 of the present Agreement, the <span
+                                                class="name_site">BitVest</span> will have the right to delete the Users
+                                            Personal Cabinet and demand indemnity for losses.
+                                        </p>
+                                        <p>
+                                            11.4. The <span class="name_site">BitVest</span> is not responsible for the
+                                            operability of the Site and/or the System and does not guarantee its
+                                            continuous operation. The <span class="name_site">BitVest</span> does not
+                                            guarantee the safety of the information published on the Site and/or in the
+                                            System as well as does not guarantee the possibility of continuous access to
+                                            the information about Orders and closed Deals, the possibility of Order
+                                            placement and of making Deals.
+                                        </p>
+                                        <p>
+                                            11.5. The User uses the Site and the System in its original form at his/her
+                                            own risk. The <span class="name_site">BitVest</span> does not guarantee the
+                                            achievement of any results by the User owing to the Site and/or System use.
+                                        </p>
+                                        <p>
+                                            11.6. The <span class="name_site">BitVest</span> does not guarantee that the
+                                            Site and the System satisfy the requirements of the User as well as does not
+                                            guarantee continuous, fast, save and error-free access to the Site and/or
+                                            the System.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>12. SPECIAL CONDITIONS</h3>
+                                        <p>
+                                            12.1. The Site and the System can contain external links to other sites in
+                                            the Internet network (third parties sites). The abovementioned third parties
+                                            sites and their content are not checked by criteria of conformity with
+                                            certain requirements (authenticity, completeness, legality, etc.). The <span
+                                                class="name_site">BitVest</span> will not be liable for the information
+                                            and the materials published on third parties sites, which the User can
+                                            access via the Site and/or the System as well as does not assume any
+                                            responsibility for expressed opinions or statements, advertising materials,
+                                            the accessibility and possible consequences of use of third parties sites.
+                                        </p>
+                                        <p>
+                                            12.2. The <span class="name_site">BitVest</span> has the right to transfer
+                                            rights and debts under all obligations derived from the Agreement. By
+                                            accepting the present Agreement the User gives their consent on transferring
+                                            rights and debts to any third party. In case of rights and/or debts are
+                                            transferred, the <span class="name_site">BitVest</span> will inform the User
+                                            about it leaving the corresponding message on the Site and/or in the System.
+                                        </p>
+                                        <p>
+                                            12.3. Given the specifics of transactions, <span
+                                                class="name_site">BitVest</span> does not implement a chargeback policy.
+                                            However, <span class="name_site">BitVest</span> has developed and
+                                            implemented a detailed Cross-Chain Recovery Policy, which provides a
+                                            detailed guideline in the cases where an erroneous deposit of one
+                                            cryptocurrency into wallet address instead of another cryptocurrency is made
+                                            by the User. The recovery of Cross-chain deposits is an inherently dangerous
+                                            and a very time consuming process. Not all deposits can be recovered and
+                                            dependent on which currency has been mistakenly sent to which address can
+                                            influence difficulty, time and security risk involved.
+                                        </p>
+                                        <p>
+                                            12.4. Making a transaction, the User agrees and carries the entire risk on
+                                            the transaction. To <span class="name_site">BitVest</span> cannot be made
+                                            any claims for the cancellation of the Transaction. <span class="name_site">BitVest</span>
+                                            does not accept or process applications from anyone for the return and / or
+                                            cancellation of an operation. The Exchange take 1% fee from ever deposit.
+                                        </p>
+                                        <p>
+                                            12.5. Withdrawing is carried funds from cryptocurrency wallets of our
+                                            exchange to other cryptocurrency wallets that are not part of our exchange
+                                            and are in the explotation of other payment systems after the procedures of
+                                            verification of ownership of the corresponding crypto-wallet to the
+                                            corresponding user on the right of ownership, and synchronization of our
+                                            exchange with the cryptocurrency wallet to which the User whants to withdraw
+                                            funds.
+                                        </p>
+                                        <p>
+                                            12.5.1 Verification of cryptocurrencies is carried out in order to exclude
+                                            the possibility of illegal use of funds contained in the account of the user
+                                            of our exchange.
+                                        </p>
+                                        <p>
+                                            12.5.1.1 Verification of crypto-wallets is carried out in the following
+                                            order:
+
+                                        </p>
+                                        <ul class="bullet-list">
+                                            <li>Creation of a deposit application;</li>
+                                            <li>Witdrawing the verified cryptocurrency wallet in the declared amount
+                                                according to the commission terms established by the Parties.
+                                            </li>
+                                        </ul>
+                                        <p></p>
+                                        <p>
+                                            12.5.1.2 If the User has no activity on account for 20 days, no withdraw, no
+                                            trading, no deposit, the activation is nessesary
+                                        </p>
+                                        <p>
+                                            12.5.2. Synchronization cryptocell is carried out with the aim of
+                                            eliminating the possibility of creating users accounts, and the provision of
+                                            certainly not truthful personal data.
+                                        </p>
+                                        <p>
+                                            12.5.2.1. Synchronization of cryptocurrency wallets is carried out in the
+                                            following order:
+                                        </p>
+                                        <ul class="bullet-list">
+                                            <li>Installation of the Chrome browser extension and other browsers on the
+                                                Chromium system.
+                                            </li>
+                                            <li>Authorization on the site, part of which is the cryptocurrency wallet to
+                                                which the User intends to withdraw their funds.
+                                            </li>
+                                        </ul>
+                                        <p></p>
+                                        <p>
+                                            12.6. User who is a citizen of the Russian Federation agrees that due to the
+                                            aggressive policy of this State and the imposition of appropriate
+                                            international sanctions on it and the Russian Federation's ranking as a
+                                            high-risk country for illegal financial transactions, he will have to make
+                                            an insurance contribution to the account provided by the exchange. The same
+                                            rule is introduced for User-s from another high-resked countries for illegal
+                                            financial transactions.
+                                        </p>
+                                        <p>
+                                            12.6.1. The insurance payment will be returned to the User's account within
+                                            14 days if there is no data on the commission of any actions that violate
+                                            the terms of this Agreement, the norms of international law, the customs of
+                                            honest financial and information turnover.
+                                        </p>
+                                        <p>
+                                            12.7. User agrees that it will not be able to carry out over-the-counter.
+                                        </p>
+                                        <p>
+                                            12.8 Users who have made a deposit, but received their funds from another
+                                            account, should buy premium account in case, if they received more then 0.02
+                                            BTC from one User. This rule applies to those, who is registered earlier
+                                            than 1 month. After one month passed, if premium account isn't connected,
+                                            all new funds, if it is received from another account, will be available for
+                                            withdrawing, but those funds, which was received during time, when term of
+                                            registration was less, than 1 month, will be frozen until User don't connect
+                                            premium account or make an insurance payment.
+                                        </p>
+                                        <p>
+                                            12.9 Deposit for purchasing premium status and insurance payment should be
+                                            done by one payment.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>13. SECURED DEAL</h3>
+                                        <p>
+                                            <b>13.1. Secured Deal - a service for exchanging of digital and tangible
+                                                goods and services between Users in a secure way.</b>
+                                        </p>
+                                        <p>
+                                            13.1.1. The essence of this service is that Buyer provides the Seller with
+                                            the funds under a password, after which the Seller provides the declared
+                                            service or goods. After Buyer receives the product or service in full, the
+                                            Buyer informs the Seller of the password for these funds, after which the
+                                            Seller receives the right to dispose of these funds in full.
+                                        </p>
+                                        <p>
+                                            13.1.2. Protecting a Secured Deal
+                                        </p>
+                                        <p>
+                                            13.1.2.1. The protection of a Secure Deal is ensured by the possibility of
+                                            establishing a three-way conference with the seller, buyer and
+                                            administrator, who is obliged to monitor the observance of mutual rights and
+                                            obligations by all parties to the transaction.
+                                        </p>
+                                        <p>
+                                            13.1.2.2. In order to protect the rights of our Users, it is also possible
+                                            to open a dispute, where the administrator will act as an arbitrator.
+                                            Administrator is obliged to evaluate all the arguments of first and second
+                                            parties impartially in order to determine the solution of the dispute.
+                                        </p>
+                                        <p>
+                                            13.1.3. In order to make a secure purchase transaction, one of the Parties
+                                            must create a conference with administrator. Then one of the Parties shall
+                                            make an application on the form below.
+                                            You need to inform such parameters of transaction as:
+                                        </p>
+                                        <ul class="bullet-list">
+                                            <li>The good or service to be provided to the Customer with a complete and
+                                                comprehensive description of item and its condition.
+                                            </li>
+                                            <li>Price of this product or service.</li>
+                                            <li>The period within which the Seller is obliged to provide the goods or
+                                                services to the Buyer. If this is a tangible commodity and will be sent
+                                                by postal services or transport companies - responsibility for
+                                                compliance with the deadlines is vested in the transport company, the
+                                                opening of disputes on this fact will not have consequences, except in
+                                                the case if the Seller knowingly indicated incorrect data, or otherwise
+                                                interfered with the correct operation of the transport company or postal
+                                                service.
+                                            </li>
+                                            <li>After the application has been made to the tripartite conference, the
+                                                second second, which did not prepare the application, must fully agree
+                                                to the terms and conditions specified in the application.
+                                            </li>
+                                        </ul>
+                                        <p></p>
+                                        <p>
+                                            13.1.4. Disputes in Secured Deal.
+                                        </p>
+                                        <p>
+                                            13.1.4.1 If the Parties fail to comply with the conditions specified in the
+                                            application, the Party whose rights have been violated has the right to open
+                                            a dispute. In connection with the decisions of te arbitrator
+                                            (administrator), the agreed amount may be withdrawn from the Seller's
+                                            account in favour of the buyer in order to ensure his financial security in
+                                            accordance with the rules of our exchange. If the goods have caused moral,
+                                            material or any other damage to the buyer, the arbitrator shall not be
+                                            entitled to withdraw from the Seller's account the amount of damage claimed
+                                            by the Buyer, as this is contrary to the policy of our exchange.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>14. WARRANTIES</h3>
+                                        <p>
+                                            14.1. Neither <span class="name_site">BitVest</span> nor its affiliates make
+                                            any specific promises about functioning of the Site and/or System. For
+                                            example, <span class="name_site">BitVest</span> does not make any
+                                            commitments about the content of the Site, the specific functions of the
+                                            System, or their reliability, availability or ability to meet the Users
+                                            needs. <span class="name_site">BitVest</span> provides the Site and System
+                                            "AS IS".
+                                        </p>
+                                        <p>
+                                            14.2. To the extent permitted by law <span class="name_site">BitVest</span>
+                                            excludes all warranties, guarantees, conditions, representations, and
+                                            undertakings.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>15. LIMITATION OF LIABILITY</h3>
+                                        <p>
+                                            15.1. To the extent permitted by law neither <span
+                                                class="name_site">BitVest</span> nor <span
+                                                class="name_site">BitVest</span>' affiliates, and <span
+                                                class="name_site">BitVest</span>' suppliers and distributors will be
+                                            responsible for lost profits, revenues, financial losses, indirect, special,
+                                            consequential, exemplary damages.
+                                        </p>
+                                        <p>
+                                            15.2. To the extent permitted by law the total amount of <span
+                                                class="name_site">BitVest</span> liability, its affiliates, and <span
+                                                class="name_site">BitVest</span>'S suppliers and distributors is limited
+                                            to the amount you paid to <span class="name_site">BitVest</span> for all
+                                            Services provided during 3 (three) months prior to the event giving rise to
+                                            the liability.
+                                        </p>
+                                        <p>
+                                            15.3. <span class="name_site">BitVest</span>, its affiliates, and <span
+                                                class="name_site">BitVest</span>'S suppliers and distributors will not
+                                            be liable for any expense, loss or damage that is not reasonably
+                                            foreseeable.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>16. INDEMNIFICATION</h3>
+                                        <p>
+                                            16.1. The User agrees to defend, indemnify and hold <span class="name_site">BitVest</span>,
+                                            its affiliates and their respective employees, officers, directors and
+                                            stockholders harmless from and against any and all damages claimed by a
+                                            third party as a result of actions by User in violation of this Agreement.
+                                            The User agrees to defend, indemnify and hold <span class="name_site">BitVest</span>,
+                                            its affiliates and their respective employees, officers, directors and
+                                            stockholders harmless from and against any and all damages for damages to
+                                            property, bodily injury, death, or other injuries arising from the
+                                            negligence or misconduct of the User or any person for whom User is legally
+                                            responsible.
+                                        </p>
+                                        <p>
+                                            16.2. The party seeking indemnification in any case shall promptly give
+                                            written notice to the other of the claim for which indemnification is sought
+                                            and shall cooperate with the other party in the defense of such an action or
+                                            suit. The failure to give or delay in giving any such notice shall not limit
+                                            the indemnifying party's rights hereunder except to the extent it is
+                                            prejudiced thereby. The indemnifying party shall have the right, at its
+                                            expense, to direct any such legal proceeding and the negotiation and
+                                            settlement of any such claim or demand. The indemnifying party shall have no
+                                            liability for any settlement made without its consent or for any fees or
+                                            expenses incurred by the other party after the indemnifying party begins
+                                            directing the legal proceeding.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>17. DISPUTE SETTLEMENT</h3>
+                                        <p>
+                                            17.1. The Parties will tend to solve all disputes, differences and claims
+                                            that can arise out of the execution, termination or cancellation of the
+                                            Agreement by means of negotiations. The Party that has some claims should
+                                            send a notification to the other Party describing the arisen claims and/or
+                                            differences.
+                                        </p>
+                                        <p>
+                                            17.2. The Party in default on its obligations hereunder shall promptly cure
+                                            the breach and take due measures to eliminate the consequences. Any dispute
+                                            arising out of or in connection with this Agreement (including a dispute
+                                            regarding the existence, validity or termination of this Agreement or the
+                                            consequences of its nullity) shall be referred to and finally resolved by
+                                            arbitration under the Arbitration Rules of the London Court of International
+                                            Arbitration.
+                                        </p>
+                                        <p>
+                                            17.3. If any dispute occurs as to the performance or interpretation of the
+                                            present Agreement that cannot be resolved amicably or in arbitration the
+                                            Company is entitled to demand the dispute be settled by the Court in
+                                            location where the <span class="name_site">BitVest</span> resides.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>18. AMENDMENTS OF THE AGREEMENT</h3>
+                                        <p>
+                                            18.1. The Service has the right to unilaterally change the terms of the
+                                            Agreement, Privacy Policy, Anti-Money Laundering Policy and the Fees. The
+                                            changes take effect 3 (three) days after the moment the new version of
+                                            corresponding documents is published.
+                                        </p>
+                                        <p>
+                                            18.2. At each successive visit to the Site and before starting the use of
+                                            the Personal Cabinet the User commits to become familiar with the new
+                                            version of the Agreement, Privacy Policy, Anti-Money Laundering Policy and
+                                            the Fees. If the User continues to use the Site and the System it will mean
+                                            that he/she agrees with new versions of the corresponding documents.
+                                        </p>
+                                        <p>
+                                            18.3. If the User does not accept new terms of the Agreement, Privacy
+                                            Policy, Anti-Money Laundering Policy and the Fees, he/she should stop using
+                                            the Site having closed the Deals with other Users.
+                                        </p>
+                                    </div>
+                                    <div class="block">
+                                        <h3>19. CONCLUDING PROVISIONS</h3>
+                                        <p>
+                                            19.1. With the exception to the cases defined by the Agreement and the
+                                            current legislation, all the notifications, messages and documents related
+                                            to the fulfillment of obligations arised out of the Agreement should be sent
+                                            to and are considered as received by the Parties if they have been sent via
+                                            email from the authorized address of one Party to the authorized address of
+                                            the other Party. An authorized address can be:
+                                        </p>
+                                        <ul class="bullet-list">
+                                            <li>for the User: the email address indicated in the User Personal
+                                                Cabinet;
+                                            </li>
+                                            <li>for the <span class="name_site">BitVest</span>: <span
+                                                    class="support_mail">support@bitvest.com</span>.
+                                            </li>
+                                        </ul>
+                                        <p></p>
+                                        <p>
+                                            19.2. The <span class="name_site">BitVest</span> and all legal relations
+                                            concerning it are regulated by the legislation of the UK without taking into
+                                            account its conflict rules. All the arisen disputes are solved according to
+                                            the legislation of the UK.
+                                        </p>
+                                        <p>
+                                            19.3. If any clause of the Agreement is found void and unenforceable by a
+                                            court decision, it will not affect the validity of other clauses of the
+                                            Agreement, which shall remain valid and enforceable.
+                                            <br><br>19.4. According to our rules, all of purchasing should be done from
+                                            your external wallet.</p>
+                                    </div>
+                                {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div>
+                <footer class="footer section-padding bg-dark-blue">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-lg-4">
+                                <div class="mb-4 mb-lg-0">
+                                    <h1 class="logo mr-auto"><a href="/">Bit<span style='color:#fff'>Vest</span></a>
+                                    </h1>
+                                    <p class="text-gray">The World's Leading Cryptocurrency Exchange</p>
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-3 col-lg-2">
+                                <div class="footer-widget mb-4 mb-sm-0">
+                                    <h5 class="fw-semi-bold text-dark-400 widget-title text-white mb-3">Company</h5>
+                                    <ul class="list-unstyled widget-item">
+                                        <li><a href="/about" class="text-gray mb-2">About Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-3 col-lg-2">
+                                <div class="footer-widget mb-4 mb-sm-0">
+                                    <h5 class="fw-semi-bold text-dark-400 widget-title text-white mb-3">Support</h5>
+                                    <ul class="list-unstyled widget-item">
+                                        <li><a href="/contact" class="text-gray mb-2">Contact Us</a></li>
+                                        <li><a href="/terms" class="text-gray mb-2">Terms of service</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <div class="footer-widget">
+                                    <h5 class="fw-semi-bold text-dark-400 widget-title text-white mb-3">Exchange
+                                        Pair</h5>
+                                    <div class="row">
+                                        <div class="d-flex justify-content-sm-between">
+                                            <ul class="list-unstyled widget-item">
+                                                <li><a href="/register/" class="text-gray mb-2">ETH to BTC</a></li>
+                                                <li><a href="/register/" class="text-gray mb-2">BTC to ETH</a></li>
+                                                <li><a href="/register/" class="text-gray mb-2">LTC to ETH</a></li>
+                                                <li><a href="/register/" class="text-gray mb-2">USDT to BTC</a></li>
+                                            </ul>
+                                            <ul class="list-unstyled widget-item ms-5 ms-sm-0">
+                                                <li><a href="/register/" class="text-gray mb-2">BTC to USDT</a></li>
+                                                <li><a href="/register/" class="text-gray mb-2">LTC to BTC</a></li>
+                                                <li><a href="/register/" class="text-gray mb-2">XMR to BTC</a></li>
+                                                <li><a href="/register/" class="text-gray mb-2">ETC to DASH</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <div class="copyrights bg-dark-blue py-4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-sm-9 col-md-8">
+                                <p class="mb-0 text-center text-sm-start text-gray fs-6">
+                                    Copyright © 2021 <a href="#" target="_blank"
+                                                        class="copyright-links fw-bold text-gray ms-1 text-hover-primary">
+                                                        BitVest</a> All Rights Reserved.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+{% endblock content %}

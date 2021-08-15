@@ -1,0 +1,2213 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BitVest</title>
+    <link rel="icon" href="{% static 'app/img/favicon.png' %}" />
+    <link rel="stylesheet" href="{% static 'app/exchange/css/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+    <style type="text/css">
+        .swal-icon--error {
+            border-color: #f27474;
+            -webkit-animation: animateErrorIcon 0.5s;
+            animation: animateErrorIcon 0.5s;
+        }
+        .swal-icon--error__x-mark {
+            position: relative;
+            display: block;
+            -webkit-animation: animateXMark 0.5s;
+            animation: animateXMark 0.5s;
+        }
+        .swal-icon--error__line {
+            position: absolute;
+            height: 5px;
+            width: 47px;
+            background-color: #f27474;
+            display: block;
+            top: 37px;
+            border-radius: 2px;
+        }
+        .swal-icon--error__line--left {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            left: 17px;
+        }
+        .swal-icon--error__line--right {
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            right: 16px;
+        }
+        @-webkit-keyframes animateErrorIcon {
+            0% {
+                -webkit-transform: rotateX(100deg);
+                transform: rotateX(100deg);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+        @keyframes animateErrorIcon {
+            0% {
+                -webkit-transform: rotateX(100deg);
+                transform: rotateX(100deg);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes animateXMark {
+            0% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            50% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            80% {
+                -webkit-transform: scale(1.15);
+                transform: scale(1.15);
+                margin-top: -6px;
+            }
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                margin-top: 0;
+                opacity: 1;
+            }
+        }
+        @keyframes animateXMark {
+            0% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            50% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            80% {
+                -webkit-transform: scale(1.15);
+                transform: scale(1.15);
+                margin-top: -6px;
+            }
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                margin-top: 0;
+                opacity: 1;
+            }
+        }
+        .swal-icon--warning {
+            border-color: #f8bb86;
+            -webkit-animation: pulseWarning 0.75s infinite alternate;
+            animation: pulseWarning 0.75s infinite alternate;
+        }
+        .swal-icon--warning__body {
+            width: 5px;
+            height: 47px;
+            top: 10px;
+            border-radius: 2px;
+            margin-left: -2px;
+        }
+        .swal-icon--warning__body,
+        .swal-icon--warning__dot {
+            position: absolute;
+            left: 50%;
+            background-color: #f8bb86;
+        }
+        .swal-icon--warning__dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            margin-left: -4px;
+            bottom: -11px;
+        }
+        @-webkit-keyframes pulseWarning {
+            0% {
+                border-color: #f8d486;
+            }
+            to {
+                border-color: #f8bb86;
+            }
+        }
+        @keyframes pulseWarning {
+            0% {
+                border-color: #f8d486;
+            }
+            to {
+                border-color: #f8bb86;
+            }
+        }
+        .swal-icon--success {
+            border-color: #a5dc86;
+        }
+        .swal-icon--success:after,
+        .swal-icon--success:before {
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            width: 60px;
+            height: 120px;
+            background: #fff;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .swal-icon--success:before {
+            border-radius: 120px 0 0 120px;
+            top: -7px;
+            left: -33px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: 60px 60px;
+            transform-origin: 60px 60px;
+        }
+        .swal-icon--success:after {
+            border-radius: 0 120px 120px 0;
+            top: -11px;
+            left: 30px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: 0 60px;
+            transform-origin: 0 60px;
+            -webkit-animation: rotatePlaceholder 4.25s ease-in;
+            animation: rotatePlaceholder 4.25s ease-in;
+        }
+        .swal-icon--success__ring {
+            width: 80px;
+            height: 80px;
+            border: 4px solid hsl(345deg 77% 57%);
+            border-radius: 50%;
+            box-sizing: content-box;
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            z-index: 2;
+        }
+        .swal-icon--success__hide-corners {
+            width: 5px;
+            height: 90px;
+            background-color: #fff;
+            padding: 1px;
+            position: absolute;
+            left: 28px;
+            top: 8px;
+            z-index: 1;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+        .swal-icon--success__line {
+            height: 5px;
+            background-color: #e63d67;
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 2;
+        }
+        .swal-icon--success__line--tip {
+            width: 25px;
+            left: 14px;
+            top: 46px;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            -webkit-animation: animateSuccessTip 0.75s;
+            animation: animateSuccessTip 0.75s;
+        }
+        .swal-icon--success__line--long {
+            width: 50px;
+            right: 15px;
+            top: 39px;
+        }
+        @-webkit-keyframes rotatePlaceholder {
+            0% {
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+            5% {
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+            12% {
+                -webkit-transform: rotate(-405deg);
+                transform: rotate(-405deg);
+            }
+            to {
+                -webkit-transform: rotate(-405deg);
+                transform: rotate(-405deg);
+            }
+        }
+        @keyframes rotatePlaceholder {
+            0% {
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+            5% {
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+            12% {
+                -webkit-transform: rotate(-405deg);
+                transform: rotate(-405deg);
+            }
+            to {
+                -webkit-transform: rotate(-405deg);
+                transform: rotate(-405deg);
+            }
+        }
+        @-webkit-keyframes animateSuccessTip {
+            0% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            54% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            70% {
+                width: 50px;
+                left: -8px;
+                top: 37px;
+            }
+            84% {
+                width: 17px;
+                left: 21px;
+                top: 48px;
+            }
+            to {
+                width: 25px;
+                left: 14px;
+                top: 45px;
+            }
+        }
+        @keyframes animateSuccessTip {
+            0% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            54% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            70% {
+                width: 50px;
+                left: -8px;
+                top: 37px;
+            }
+            84% {
+                width: 17px;
+                left: 21px;
+                top: 48px;
+            }
+            to {
+                width: 25px;
+                left: 14px;
+                top: 45px;
+            }
+        }
+        @-webkit-keyframes animateSuccessLong {
+            0% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            65% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            84% {
+                width: 55px;
+                right: 0;
+                top: 35px;
+            }
+            to {
+                width: 47px;
+                right: 8px;
+                top: 38px;
+            }
+        }
+        @keyframes animateSuccessLong {
+            0% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            65% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            84% {
+                width: 55px;
+                right: 0;
+                top: 35px;
+            }
+            to {
+                width: 47px;
+                right: 8px;
+                top: 38px;
+            }
+        }
+        .swal-icon--info {
+            border-color: #c9dae1;
+        }
+        .swal-icon--info:before {
+            width: 5px;
+            height: 29px;
+            bottom: 17px;
+            border-radius: 2px;
+            margin-left: -2px;
+        }
+        .swal-icon--info:after,
+        .swal-icon--info:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            background-color: #c9dae1;
+        }
+        .swal-icon--info:after {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            margin-left: -3px;
+            top: 19px;
+        }
+        .swal-icon {
+            width: 80px;
+            height: 80px;
+            border-width: 4px;
+            border-style: solid;
+            border-radius: 50%;
+            padding: 0;
+            position: relative;
+            box-sizing: content-box;
+            margin: 20px auto;
+        }
+        .swal-icon:first-child {
+            margin-top: 32px;
+        }
+        .swal-icon--custom {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            border: none;
+            border-radius: 0;
+        }
+        .swal-icon img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .swal-title {
+            color: #000;
+            font-weight: 600;
+            text-transform: none;
+            position: relative;
+            display: block;
+            padding: 13px 16px;
+            font-size: 27px;
+            line-height: normal;
+            text-align: center;
+            margin-bottom: 0;
+        }
+        .swal-title:first-child {
+            margin-top: 26px;
+        }
+        .swal-title:not(:first-child) {
+            padding-bottom: 0;
+        }
+        .swal-title:not(:last-child) {
+            margin-bottom: 13px;
+        }
+        .swal-text {
+            font-size: 16px;
+            position: relative;
+            float: none;
+            line-height: normal;
+            vertical-align: top;
+            text-align: left;
+            display: inline-block;
+            margin: 0;
+            padding: 0 10px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.64);
+            max-width: calc(100% - 20px);
+            overflow-wrap: break-word;
+            box-sizing: border-box;
+        }
+        .swal-text:first-child {
+            margin-top: 45px;
+        }
+        .swal-text:last-child {
+            margin-bottom: 45px;
+        }
+        .swal-footer {
+            text-align: right;
+            padding-top: 13px;
+            margin-top: 13px;
+            padding: 13px 16px;
+            border-radius: inherit;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .swal-button-container {
+            margin: 5px;
+            display: inline-block;
+            position: relative;
+        }
+        .swal-button {
+            background-color: #053eff;
+            color: #fff;
+            border: none;
+            box-shadow: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 24px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .swal-button::-moz-focus-inner {
+            border: 0;
+        }
+        .swal-button--cancel {
+            color: #555;
+            background-color: #efefef;
+        }
+        .swal-button--cancel[not:disabled]:hover {
+            background-color: #e8e8e8;
+        }
+        .swal-button--cancel:active {
+            background-color: #d7d7d7;
+        }
+        .swal-button--cancel:focus {
+            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(116, 136, 150, 0.29);
+        }
+        .swal-button--danger {
+            background-color: #e64942;
+        }
+        .swal-button--danger[not:disabled]:hover {
+            background-color: #df4740;
+        }
+        .swal-button--danger:active {
+            background-color: #cf423b;
+        }
+        .swal-button--danger:focus {
+            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(165, 43, 43, 0.29);
+        }
+        .swal-content {
+            padding: 0 20px;
+            margin-top: 20px;
+            font-size: medium;
+        }
+        .swal-content:last-child {
+            margin-bottom: 20px;
+        }
+        .swal-content__input,
+        .swal-content__textarea {
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: none;
+            font-size: 14px;
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.14);
+            padding: 10px 13px;
+            border-radius: 2px;
+            transition: border-color 0.2s;
+        }
+        .swal-content__input:focus,
+        .swal-content__textarea:focus {
+            outline: none;
+            border-color: #6db8ff;
+        }
+        .swal-content__textarea {
+            resize: vertical;
+        }
+        .swal-button--loading {
+            color: transparent;
+        }
+        .swal-button--loading ~ .swal-button__loader {
+            opacity: 1;
+        }
+        .swal-button__loader {
+            position: absolute;
+            height: auto;
+            width: 43px;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+        }
+        .swal-button__loader div {
+            display: inline-block;
+            float: none;
+            vertical-align: baseline;
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            border: none;
+            margin: 2px;
+            opacity: 0.4;
+            border-radius: 7px;
+            background-color: hsla(0, 0%, 100%, 0.9);
+            transition: background 0.2s;
+            -webkit-animation: swal-loading-anim 1s infinite;
+            animation: swal-loading-anim 1s infinite;
+        }
+        .swal-button__loader div:nth-child(3n + 2) {
+            -webkit-animation-delay: 0.15s;
+            animation-delay: 0.15s;
+        }
+        .swal-button__loader div:nth-child(3n + 3) {
+            -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+        }
+        @-webkit-keyframes swal-loading-anim {
+            0% {
+                opacity: 0.4;
+            }
+            20% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+            to {
+                opacity: 0.4;
+            }
+        }
+        @keyframes swal-loading-anim {
+            0% {
+                opacity: 0.4;
+            }
+            20% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+            to {
+                opacity: 0.4;
+            }
+        }
+        .swal-overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0;
+            overflow-y: auto;
+            background-color: rgb(0 0 0 / 71%);
+            z-index: 10000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .swal-overlay:before {
+            content: " ";
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+        .swal-overlay--show-modal {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .swal-overlay--show-modal .swal-modal {
+            opacity: 1;
+            pointer-events: auto;
+            box-sizing: border-box;
+            -webkit-animation: showSweetAlert 0.3s;
+            animation: showSweetAlert 0.3s;
+            will-change: transform;
+        }
+        .swal-modal {
+            width: 478px;
+            opacity: 0;
+            pointer-events: none;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            position: static;
+            margin: 20px auto;
+            display: inline-block;
+            vertical-align: middle;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            z-index: 10001;
+            transition: opacity 0.2s, -webkit-transform 0.3s;
+            transition: transform 0.3s, opacity 0.2s;
+            transition: transform 0.3s, opacity 0.2s, -webkit-transform 0.3s;
+        }
+        @media (max-width: 500px) {
+            .swal-modal {
+                width: calc(100% - 20px);
+            }
+        }
+        @-webkit-keyframes showSweetAlert {
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+            1% {
+                -webkit-transform: scale(0.5);
+                transform: scale(0.5);
+            }
+            45% {
+                -webkit-transform: scale(1.05);
+                transform: scale(1.05);
+            }
+            80% {
+                -webkit-transform: scale(0.95);
+                transform: scale(0.95);
+            }
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+        @keyframes showSweetAlert {
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+            1% {
+                -webkit-transform: scale(0.5);
+                transform: scale(0.5);
+            }
+            45% {
+                -webkit-transform: scale(1.05);
+                transform: scale(1.05);
+            }
+            80% {
+                -webkit-transform: scale(0.95);
+                transform: scale(0.95);
+            }
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+        .logos {
+            color: #053EFF;
+            text-transform: capitalize;
+            font-size: large;
+            font-weight: bolder;
+            font-family: "Jost", sans-serif;
+            letter-spacing: 2px;
+        }
+        .logos span {
+            color: #000;
+        }
+    </style>
+{% endblock head %}
+
+{% block content %}
+    <body>
+<header class="light-bb">
+    <nav class="navbar navbar-expand-lg">
+        <a href="/account/" class="logos"> Bit<span>Vest</span> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
+                aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="icon ion-md-menu"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="headerMenu">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#">
+                        Exchange
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item dropdown header-img-icon">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <img src="{% static 'app/img/avatar.svg' %}" alt="avatar">
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header d-flex flex-column align-items-center">
+                            <div class="figure mb-3">
+                                <img src="img/avatar.svg" alt="">
+                            </div>
+                            <div class="info text-center">
+                                <p class="name font-weight-bold mb-0">Tony Stark</p>
+                                <p class="email text-muted mb-3">tonystark@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-body">
+                            <ul class="profile-nav">
+                                <li class="nav-item">
+                                    <a href="settings-profile-light.html" class="nav-link">
+                                        <i class="icon ion-md-person"></i>
+                                        <span>Profile</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="settings-wallet-light.html" class="nav-link">
+                                        <i class="icon ion-md-wallet"></i>
+                                        <span>My Wallet</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="settings-light.html" class="nav-link">
+                                        <i class="icon ion-md-settings"></i>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item" id="changeThemeLight">
+                                    <a href="#!" class="nav-link">
+                                        <i class="icon ion-md-sunny"></i>
+                                        <span>Theme</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="exchange-light.html" class="nav-link red">
+                                        <i class="icon ion-md-power"></i>
+                                        <span>Log Out</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid mtb15 no-fluid">
+    <div class="row sm-gutters">
+        <div class="col-md-3">
+            <div class="market-pairs">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><i
+                                class="icon ion-md-search"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Search"
+                           aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#STAR" role="tab" aria-selected="true"><i
+                                class="icon ion-md-star"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#BTC" role="tab"
+                           aria-selected="true">BTC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#ETH" role="tab" aria-selected="false">ETH</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#NEO" role="tab" aria-selected="false">NEO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#USDT" role="tab" aria-selected="false">USDT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#DAI" role="tab" aria-selected="false">DAI</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show" id="STAR" role="tabpanel">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pairs</th>
+                                <th>Last Price</th>
+                                <th>Change</th>
+                            </tr>
+                            </thead>
+                            <tbody class="mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar"
+                                   style="position: relative; overflow: visible;">
+                            <div id="mCSB_1" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                                 style="max-height: 815px;" tabindex="0">
+                                <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                     style="position:relative; top:0; left:0;" dir="ltr">
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ETH/BTC</td>
+                                        <td>0.00020255</td>
+                                        <td class="red">-2.58%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KCS/BTC</td>
+                                        <td>0.00013192</td>
+                                        <td class="green">+5.6%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XRP/BTC</td>
+                                        <td>0.00002996</td>
+                                        <td class="red">-1.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> VET/BTC</td>
+                                        <td>0.00000103</td>
+                                        <td class="green">+1.8%</td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div id="mCSB_1_scrollbar_vertical"
+                                 class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal mCSB_scrollTools_vertical"
+                                 style="display: none;">
+                                <div class="mCSB_draggerContainer">
+                                    <div id="mCSB_1_dragger_vertical" class="mCSB_dragger"
+                                         style="position: absolute; min-height: 50px; top: 0px;">
+                                        <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                                    </div>
+                                    <div class="mCSB_draggerRail"></div>
+                                </div>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show active" id="BTC" role="tabpanel">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pairs</th>
+                                <th>Last Price</th>
+                                <th>Change</th>
+                            </tr>
+                            </thead>
+                            <tbody class="mCustomScrollbar _mCS_2 mCS-autoHide"
+                                   style="position: relative; overflow: visible;">
+                            <div id="mCSB_2" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                                 style="max-height: none;" tabindex="0">
+                                <div id="mCSB_2_container" class="mCSB_container"
+                                     style="position:relative; top:0; left:0;" dir="ltr">
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ETH/BTC</td>
+                                        <td>0.00020255</td>
+                                        <td class="red">-2.58%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KCS/BTC</td>
+                                        <td>0.00013192</td>
+                                        <td class="green">+5.6%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XRP/BTC</td>
+                                        <td>0.00002996</td>
+                                        <td class="red">-1.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> VET/BTC</td>
+                                        <td>0.00000103</td>
+                                        <td class="green">+1.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> EOS/BTC</td>
+                                        <td>0.00000103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BTT/BTC</td>
+                                        <td>0.00002303</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> LTC/BTC</td>
+                                        <td>0.03520103</td>
+                                        <td class="green">+1.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRX/BTC</td>
+                                        <td>0.00330103</td>
+                                        <td class="red">-3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BSV/BTC</td>
+                                        <td>0.00300103</td>
+                                        <td class="green">+2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> COTI/BTC</td>
+                                        <td>0.003500103</td>
+                                        <td class="green">+2.85%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XYT/BTC</td>
+                                        <td>0.00003103</td>
+                                        <td class="green">+3.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BNB/BTC</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XMR/BTC</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRY/BTC</td>
+                                        <td>0.00000123</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ADA/BTC</td>
+                                        <td>0.00050103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> NEO/BTC</td>
+                                        <td>0.00340103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XLM/BTC</td>
+                                        <td>0.00035103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ENQ/BTC</td>
+                                        <td>0.00354103</td>
+                                        <td class="green">+2.02%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AVA/BTC</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AMB/BTC</td>
+                                        <td>0.05335103</td>
+                                        <td class="green">+1.0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> MAP/BTC</td>
+                                        <td>0.00234103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GO/BTC</td>
+                                        <td>0.00354103</td>
+                                        <td class="red">-6.50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KICK/BTC</td>
+                                        <td>0.02053103</td>
+                                        <td class="red">-6.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> DBC/BTC</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+7.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GGC/BTC</td>
+                                        <td>0.00353103</td>
+                                        <td class="red">-4.05%</td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div id="mCSB_2_scrollbar_vertical"
+                                 class="mCSB_scrollTools mCSB_2_scrollbar mCS-minimal mCSB_scrollTools_vertical"
+                                 style="display: block;">
+                                <div class="mCSB_draggerContainer">
+                                    <div id="mCSB_2_dragger_vertical" class="mCSB_dragger"
+                                         style="position: absolute; min-height: 50px; display: block; height: 645px; max-height: 781px; top: 0px;">
+                                        <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                                    </div>
+                                    <div class="mCSB_draggerRail"></div>
+                                </div>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="ETH" role="tabpanel">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pairs</th>
+                                <th>Last Price</th>
+                                <th>Change</th>
+                            </tr>
+                            </thead>
+                            <tbody class="mCustomScrollbar _mCS_3 mCS-autoHide mCS_no_scrollbar"
+                                   style="position: relative; overflow: visible;">
+                            <div id="mCSB_3" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                                 style="max-height: 815px;" tabindex="0">
+                                <div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                     style="position:relative; top:0; left:0;" dir="ltr">
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BTC/ETH</td>
+                                        <td>0.00020255</td>
+                                        <td class="green">+1.58%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KCS/ETH</td>
+                                        <td>0.00013192</td>
+                                        <td class="red">-0.6%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XRP/ETH</td>
+                                        <td>0.00002996</td>
+                                        <td class="red">-0.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> VET/ETH</td>
+                                        <td>0.00000103</td>
+                                        <td class="green">+1.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> EOS/ETH</td>
+                                        <td>0.00000103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BTT/ETH</td>
+                                        <td>0.00002303</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> LTC/ETH</td>
+                                        <td>0.03520103</td>
+                                        <td class="green">+1.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRX/ETH</td>
+                                        <td>0.00330103</td>
+                                        <td class="red">-3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BSV/ETH</td>
+                                        <td>0.00300103</td>
+                                        <td class="green">+2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> COTI/ETH</td>
+                                        <td>0.003500103</td>
+                                        <td class="green">+2.85%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XYT/ETH</td>
+                                        <td>0.00003103</td>
+                                        <td class="green">+3.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BNB/ETH</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XMR/ETH</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRY/ETH</td>
+                                        <td>0.00000123</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ADA/ETH</td>
+                                        <td>0.00050103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> NEO/ETH</td>
+                                        <td>0.00340103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XLM/ETH</td>
+                                        <td>0.00035103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ENQ/ETH</td>
+                                        <td>0.00354103</td>
+                                        <td class="green">+2.02%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AVA/ETH</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AMB/ETH</td>
+                                        <td>0.05335103</td>
+                                        <td class="green">+1.0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> MAP/ETH</td>
+                                        <td>0.00234103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GO/ETH</td>
+                                        <td>0.00354103</td>
+                                        <td class="red">-6.50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KICK/ETH</td>
+                                        <td>0.02053103</td>
+                                        <td class="red">-6.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> DBC/ETH</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+7.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GGC/ETH</td>
+                                        <td>0.00353103</td>
+                                        <td class="red">-4.05%</td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div id="mCSB_3_scrollbar_vertical"
+                                 class="mCSB_scrollTools mCSB_3_scrollbar mCS-minimal mCSB_scrollTools_vertical"
+                                 style="display: none;">
+                                <div class="mCSB_draggerContainer">
+                                    <div id="mCSB_3_dragger_vertical" class="mCSB_dragger"
+                                         style="position: absolute; min-height: 50px; top: 0px;">
+                                        <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                                    </div>
+                                    <div class="mCSB_draggerRail"></div>
+                                </div>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="NEO" role="tabpanel">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pairs</th>
+                                <th>Last Price</th>
+                                <th>Change</th>
+                            </tr>
+                            </thead>
+                            <tbody class="mCustomScrollbar _mCS_4 mCS-autoHide mCS_no_scrollbar"
+                                   style="position: relative; overflow: visible;">
+                            <div id="mCSB_4" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                                 style="max-height: 815px;" tabindex="0">
+                                <div id="mCSB_4_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                     style="position:relative; top:0; left:0;" dir="ltr">
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ETH/NEO</td>
+                                        <td>0.00350255</td>
+                                        <td class="red">-6.58%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KCS/NEO</td>
+                                        <td>0.00013192</td>
+                                        <td class="green">+0.6%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XRP/NEO</td>
+                                        <td>0.00002996</td>
+                                        <td class="red">-0.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> VET/NEO</td>
+                                        <td>0.00000103</td>
+                                        <td class="green">+1.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> EOS/NEO</td>
+                                        <td>0.00000103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BTT/NEO</td>
+                                        <td>0.00002303</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> LTC/NEO</td>
+                                        <td>0.03520103</td>
+                                        <td class="green">+1.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRX/NEO</td>
+                                        <td>0.00330103</td>
+                                        <td class="red">-3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BSV/NEO</td>
+                                        <td>0.00300103</td>
+                                        <td class="green">+2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> COTI/NEO</td>
+                                        <td>0.003500103</td>
+                                        <td class="green">+2.85%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XYT/NEO</td>
+                                        <td>0.00003103</td>
+                                        <td class="green">+3.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BNB/NEO</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XMR/NEO</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRY/NEO</td>
+                                        <td>0.00000123</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ADA/NEO</td>
+                                        <td>0.00050103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> NEO/NEO</td>
+                                        <td>0.00340103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XLM/NEO</td>
+                                        <td>0.00035103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ENQ/NEO</td>
+                                        <td>0.00354103</td>
+                                        <td class="green">+2.02%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AVA/NEO</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AMB/NEO</td>
+                                        <td>0.05335103</td>
+                                        <td class="green">+1.0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> MAP/NEO</td>
+                                        <td>0.00234103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GO/NEO</td>
+                                        <td>0.00354103</td>
+                                        <td class="red">-6.50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KICK/NEO</td>
+                                        <td>0.02053103</td>
+                                        <td class="red">-6.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> DBC/NEO</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+7.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GGC/NEO</td>
+                                        <td>0.00353103</td>
+                                        <td class="red">-4.05%</td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div id="mCSB_4_scrollbar_vertical"
+                                 class="mCSB_scrollTools mCSB_4_scrollbar mCS-minimal mCSB_scrollTools_vertical"
+                                 style="display: none;">
+                                <div class="mCSB_draggerContainer">
+                                    <div id="mCSB_4_dragger_vertical" class="mCSB_dragger"
+                                         style="position: absolute; min-height: 50px; top: 0px;">
+                                        <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                                    </div>
+                                    <div class="mCSB_draggerRail"></div>
+                                </div>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="USDT" role="tabpanel">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pairs</th>
+                                <th>Last Price</th>
+                                <th>Change</th>
+                            </tr>
+                            </thead>
+                            <tbody class="mCustomScrollbar _mCS_5 mCS-autoHide mCS_no_scrollbar"
+                                   style="position: relative; overflow: visible;">
+                            <div id="mCSB_5" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                                 style="max-height: 815px;" tabindex="0">
+                                <div id="mCSB_5_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                     style="position:relative; top:0; left:0;" dir="ltr">
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ETH/USDT</td>
+                                        <td>0.00350255</td>
+                                        <td class="red">-2.58%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KCS/USDT</td>
+                                        <td>0.00013192</td>
+                                        <td class="green">+6.6%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XRP/USDT</td>
+                                        <td>0.00002996</td>
+                                        <td class="red">-0.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> VET/USDT</td>
+                                        <td>0.00000103</td>
+                                        <td class="green">+1.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> EOS/USDT</td>
+                                        <td>0.00000103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BTT/USDT</td>
+                                        <td>0.00002303</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> LTC/USDT</td>
+                                        <td>0.03520103</td>
+                                        <td class="green">+1.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRX/USDT</td>
+                                        <td>0.00330103</td>
+                                        <td class="red">-3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BSV/USDT</td>
+                                        <td>0.00300103</td>
+                                        <td class="green">+2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> COTI/USDT</td>
+                                        <td>0.003500103</td>
+                                        <td class="green">+2.85%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XYT/USDT</td>
+                                        <td>0.00003103</td>
+                                        <td class="green">+3.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BNB/USDT</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XMR/USDT</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRY/USDT</td>
+                                        <td>0.00000123</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ADA/USDT</td>
+                                        <td>0.00050103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> USDT/USDT</td>
+                                        <td>0.00340103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XLM/USDT</td>
+                                        <td>0.00035103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ENQ/USDT</td>
+                                        <td>0.00354103</td>
+                                        <td class="green">+2.02%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AVA/USDT</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AMB/USDT</td>
+                                        <td>0.05335103</td>
+                                        <td class="green">+1.0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> MAP/USDT</td>
+                                        <td>0.00234103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GO/USDT</td>
+                                        <td>0.00354103</td>
+                                        <td class="red">-6.50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KICK/USDT</td>
+                                        <td>0.02053103</td>
+                                        <td class="red">-6.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> DBC/USDT</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+7.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GGC/USDT</td>
+                                        <td>0.00353103</td>
+                                        <td class="red">-4.05%</td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div id="mCSB_5_scrollbar_vertical"
+                                 class="mCSB_scrollTools mCSB_5_scrollbar mCS-minimal mCSB_scrollTools_vertical"
+                                 style="display: none;">
+                                <div class="mCSB_draggerContainer">
+                                    <div id="mCSB_5_dragger_vertical" class="mCSB_dragger"
+                                         style="position: absolute; min-height: 50px; top: 0px;">
+                                        <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                                    </div>
+                                    <div class="mCSB_draggerRail"></div>
+                                </div>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="DAI" role="tabpanel">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pairs</th>
+                                <th>Last Price</th>
+                                <th>Change</th>
+                            </tr>
+                            </thead>
+                            <tbody class="mCustomScrollbar _mCS_6 mCS-autoHide mCS_no_scrollbar"
+                                   style="position: relative; overflow: visible;">
+                            <div id="mCSB_6" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                                 style="max-height: 815px;" tabindex="0">
+                                <div id="mCSB_6_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                     style="position:relative; top:0; left:0;" dir="ltr">
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ETH/DAI</td>
+                                        <td>0.05320255</td>
+                                        <td class="green">+6.58%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KCS/DAI</td>
+                                        <td>0.00013192</td>
+                                        <td class="green">+0.6%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XRP/DAI</td>
+                                        <td>0.00002996</td>
+                                        <td class="red">-0.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> VET/DAI</td>
+                                        <td>0.00000103</td>
+                                        <td class="green">+1.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> EOS/DAI</td>
+                                        <td>0.00000103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BTT/DAI</td>
+                                        <td>0.00002303</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> LTC/DAI</td>
+                                        <td>0.03520103</td>
+                                        <td class="green">+1.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRX/DAI</td>
+                                        <td>0.00330103</td>
+                                        <td class="red">-3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BSV/DAI</td>
+                                        <td>0.00300103</td>
+                                        <td class="green">+2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> COTI/DAI</td>
+                                        <td>0.003500103</td>
+                                        <td class="green">+2.85%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XYT/DAI</td>
+                                        <td>0.00003103</td>
+                                        <td class="green">+3.55%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> BNB/DAI</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XMR/DAI</td>
+                                        <td>0.003500103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> TRY/DAI</td>
+                                        <td>0.00000123</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ADA/DAI</td>
+                                        <td>0.00050103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> DAI/DAI</td>
+                                        <td>0.00340103</td>
+                                        <td class="red">-1.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> XLM/DAI</td>
+                                        <td>0.00035103</td>
+                                        <td class="green">+5.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> ENQ/DAI</td>
+                                        <td>0.00354103</td>
+                                        <td class="green">+2.02%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AVA/DAI</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+3.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> AMB/DAI</td>
+                                        <td>0.05335103</td>
+                                        <td class="green">+1.0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> MAP/DAI</td>
+                                        <td>0.00234103</td>
+                                        <td class="red">-2.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GO/DAI</td>
+                                        <td>0.00354103</td>
+                                        <td class="red">-6.50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> KICK/DAI</td>
+                                        <td>0.02053103</td>
+                                        <td class="red">-6.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> DBC/DAI</td>
+                                        <td>0.02535103</td>
+                                        <td class="green">+7.05%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="icon ion-md-star"></i> GGC/DAI</td>
+                                        <td>0.00353103</td>
+                                        <td class="red">-4.05%</td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div id="mCSB_6_scrollbar_vertical"
+                                 class="mCSB_scrollTools mCSB_6_scrollbar mCS-minimal mCSB_scrollTools_vertical"
+                                 style="display: none;">
+                                <div class="mCSB_draggerContainer">
+                                    <div id="mCSB_6_dragger_vertical" class="mCSB_dragger"
+                                         style="position: absolute; min-height: 50px; top: 0px;">
+                                        <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                                    </div>
+                                    <div class="mCSB_draggerRail"></div>
+                                </div>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="main-chart mb15">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                    <div id="tradingview_e8053">
+                        <div id="tradingview_6ce99-wrapper"
+                             style="position: relative;box-sizing: content-box;width: 100%;height: 550px;margin: 0 auto !important;padding: 0 !important;font-family:Arial,sans-serif;">
+                            <div style="width: 100%;height: 550px;background: transparent;padding: 0 !important;">
+                                <iframe id="tradingview_6ce99"
+                                        src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_6ce99&amp;symbol=BITSTAMP%3ABTCUSD&amp;interval=D&amp;hidesidetoolbar=0&amp;symboledit=1&amp;saveimage=1&amp;toolbarbg=f1f3f6&amp;studies=%5B%5D&amp;theme=Light&amp;style=1&amp;timezone=Etc%2FUTC&amp;withdateranges=1&amp;showpopupbutton=1&amp;studies_overrides=%7B%7D&amp;overrides=%7B%7D&amp;enabled_features=%5B%5D&amp;disabled_features=%5B%5D&amp;showpopupbutton=1&amp;locale=en&amp;utm_source=crypo.netlify.app&amp;utm_medium=widget&amp;utm_campaign=chart&amp;utm_term=BITSTAMP%3ABTCUSD"
+                                        style="width: 100%; height: 100%; margin: 0 !important; padding: 0 !important;"
+                                        frameborder="0" allowtransparency="true" scrolling="no"
+                                        allowfullscreen=""></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="https://s3.tradingview.com/tv.js"></script>
+                    <script>
+                        new TradingView.widget(
+                            {
+                                "width": "100%",
+                                "height": 550,
+                                "symbol": "BITSTAMP:BTCUSD",
+                                "interval": "D",
+                                "timezone": "Etc/UTC",
+                                "theme": "Light",
+                                "style": "1",
+                                "locale": "en",
+                                "toolbar_bg": "#f1f3f6",
+                                "enable_publishing": false,
+                                "withdateranges": true,
+                                "hide_side_toolbar": false,
+                                "allow_symbol_change": true,
+                                "show_popup_button": true,
+                                "popup_width": "1000",
+                                "popup_height": "650",
+                                "container_id": "tradingview_e8053"
+                            }
+                        );
+                    </script>
+                </div>
+                <!-- TradingView Widget END -->
+            </div>
+            <div class="market-trade">
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#pills-trade-limit" role="tab"
+                           aria-selected="true">Limit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#pills-market" role="tab" aria-selected="false">Market</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#pills-stop-limit" role="tab"
+                           aria-selected="false">Stop
+                            Limit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#pills-stop-market" role="tab"
+                           aria-selected="false">Stop
+                            Market</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="pills-trade-limit" role="tabpanel">
+                        <div class="d-flex justify-content-between">
+                            <div class="market-trade-buy">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Price">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">BTC</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Amount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">ETH</span>
+                                    </div>
+                                </div>
+                                <ul class="market-trade-list">
+                                    <li><a href="#!">25%</a></li>
+                                    <li><a href="#!">50%</a></li>
+                                    <li><a href="#!">75%</a></li>
+                                    <li><a href="#!">100%</a></li>
+                                </ul>
+                                <button class="btn buy">Buy</button>
+                            </div>
+                            <div class="market-trade-sell">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Price">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">BTC</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Amount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">ETH</span>
+                                    </div>
+                                </div>
+                                <ul class="market-trade-list">
+                                    <li><a href="#!">25%</a></li>
+                                    <li><a href="#!">50%</a></li>
+                                    <li><a href="#!">75%</a></li>
+                                    <li><a href="#!">100%</a></li>
+                                </ul>
+                                <button class="btn sell">Sell</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-market" role="tabpanel">
+                        <div class="d-flex justify-content-between">
+                            <div class="market-trade-buy">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Price">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">BTC</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Amount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">ETH</span>
+                                    </div>
+                                </div>
+                                <ul class="market-trade-list">
+                                    <li><a href="#!">25%</a></li>
+                                    <li><a href="#!">50%</a></li>
+                                    <li><a href="#!">75%</a></li>
+                                    <li><a href="#!">100%</a></li>
+                                </ul>
+                                <p>Available: <span>0 BTC = 0 USD</span></p>
+                                <p>Volume: <span>0 BTC = 0 USD</span></p>
+                                <p>Margin: <span>0 BTC = 0 USD</span></p>
+                                <p>Fee: <span>0 BTC = 0 USD</span></p>
+                                <button class="btn buy">Buy</button>
+                            </div>
+                            <div class="market-trade-sell">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Price">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">BTC</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Amount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">ETH</span>
+                                    </div>
+                                </div>
+                                <ul class="market-trade-list">
+                                    <li><a href="#!">25%</a></li>
+                                    <li><a href="#!">50%</a></li>
+                                    <li><a href="#!">75%</a></li>
+                                    <li><a href="#!">100%</a></li>
+                                </ul>
+                                <p>Available: <span>0 BTC = 0 USD</span></p>
+                                <p>Volume: <span>0 BTC = 0 USD</span></p>
+                                <p>Margin: <span>0 BTC = 0 USD</span></p>
+                                <p>Fee: <span>0 BTC = 0 USD</span></p>
+                                <button class="btn sell">Sell</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-stop-limit" role="tabpanel">
+                        <div class="d-flex justify-content-between">
+                            <div class="market-trade-buy">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Price">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">BTC</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Amount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">ETH</span>
+                                    </div>
+                                </div>
+                                <ul class="market-trade-list">
+                                    <li><a href="#!">25%</a></li>
+                                    <li><a href="#!">50%</a></li>
+                                    <li><a href="#!">75%</a></li>
+                                    <li><a href="#!">100%</a></li>
+                                </ul>
+                                <p>Available: <span>0 BTC = 0 USD</span></p>
+                                <p>Volume: <span>0 BTC = 0 USD</span></p>
+                                <p>Margin: <span>0 BTC = 0 USD</span></p>
+                                <p>Fee: <span>0 BTC = 0 USD</span></p>
+                                <button class="btn buy">Buy</button>
+                            </div>
+                            <div class="market-trade-sell">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Price">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">BTC</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Amount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">ETH</span>
+                                    </div>
+                                </div>
+                                <ul class="market-trade-list">
+                                    <li><a href="#!">25%</a></li>
+                                    <li><a href="#!">50%</a></li>
+                                    <li><a href="#!">75%</a></li>
+                                    <li><a href="#!">100%</a></li>
+                                </ul>
+                                <p>Available: <span>0 BTC = 0 USD</span></p>
+                                <p>Volume: <span>0 BTC = 0 USD</span></p>
+                                <p>Margin: <span>0 BTC = 0 USD</span></p>
+                                <p>Fee: <span>0 BTC = 0 USD</span></p>
+                                <button class="btn sell">Sell</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-stop-market" role="tabpanel">
+                        <div class="d-flex justify-content-between">
+                            <div class="market-trade-buy">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Price">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">BTC</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Amount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">ETH</span>
+                                    </div>
+                                </div>
+                                <ul class="market-trade-list">
+                                    <li><a href="#!">25%</a></li>
+                                    <li><a href="#!">50%</a></li>
+                                    <li><a href="#!">75%</a></li>
+                                    <li><a href="#!">100%</a></li>
+                                </ul>
+                                <p>Available: <span>0 BTC = 0 USD</span></p>
+                                <p>Volume: <span>0 BTC = 0 USD</span></p>
+                                <p>Margin: <span>0 BTC = 0 USD</span></p>
+                                <p>Fee: <span>0 BTC = 0 USD</span></p>
+                                <button class="btn buy">Buy</button>
+                            </div>
+                            <div class="market-trade-sell">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Price">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">BTC</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Amount">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">ETH</span>
+                                    </div>
+                                </div>
+                                <ul class="market-trade-list">
+                                    <li><a href="#!">25%</a></li>
+                                    <li><a href="#!">50%</a></li>
+                                    <li><a href="#!">75%</a></li>
+                                    <li><a href="#!">100%</a></li>
+                                </ul>
+                                <p>Available: <span>0 BTC = 0 USD</span></p>
+                                <p>Volume: <span>0 BTC = 0 USD</span></p>
+                                <p>Margin: <span>0 BTC = 0 USD</span></p>
+                                <p>Fee: <span>0 BTC = 0 USD</span></p>
+                                <button class="btn sell">Sell</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="order-book mb15">
+                <h2 class="heading">Order Book</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Price(BTC)</th>
+                        <th>Amount(ETH)</th>
+                        <th>Total(ETH)</th>
+                    </tr>
+                    </thead>
+                    <tbody class="mCustomScrollbar _mCS_7 mCS-autoHide" style="position: relative; overflow: visible;">
+                    <div id="mCSB_7" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                         style="max-height: none;" tabindex="0">
+                        <div id="mCSB_7_container" class="mCSB_container" style="position:relative; top:0; left:0;"
+                             dir="ltr">
+                            <tr class="red-bg-80">
+                                <td class="red">0.022572</td>
+                                <td>1.253415</td>
+                                <td>15.27648</td>
+                            </tr>
+                            <tr class="red-bg-60">
+                                <td class="red">0.020371</td>
+                                <td>1.205415</td>
+                                <td>15.25648</td>
+                            </tr>
+                            <tr class="red-bg-40">
+                                <td class="red">0.023572</td>
+                                <td>1.645415</td>
+                                <td>15.23648</td>
+                            </tr>
+                            <tr class="red-bg-20">
+                                <td class="red">0.032378</td>
+                                <td>1.206715</td>
+                                <td>15.25348</td>
+                            </tr>
+                            <tr class="red-bg-10">
+                                <td class="red">0.022573</td>
+                                <td>1.262415</td>
+                                <td>15.19648</td>
+                            </tr>
+                            <tr class="red-bg-8">
+                                <td class="red">0.154377</td>
+                                <td>1.225415</td>
+                                <td>15.35648</td>
+                            </tr>
+                            <tr class="red-bg-5">
+                                <td class="red">0.120373</td>
+                                <td>1.285415</td>
+                                <td>15.25648</td>
+                            </tr>
+                            <tr class="red-bg">
+                                <td class="red">0.028576</td>
+                                <td>1.291415</td>
+                                <td>15.26448</td>
+                            </tr>
+                        </div>
+                    </div>
+                    <div id="mCSB_7_scrollbar_vertical"
+                         class="mCSB_scrollTools mCSB_7_scrollbar mCS-minimal mCSB_scrollTools_vertical"
+                         style="display: block;">
+                        <div class="mCSB_draggerContainer">
+                            <div id="mCSB_7_dragger_vertical" class="mCSB_dragger"
+                                 style="position: absolute; min-height: 50px; display: block; height: 126px; max-height: 177px; top: 0px;">
+                                <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                            </div>
+                            <div class="mCSB_draggerRail"></div>
+                        </div>
+                    </div>
+                    </tbody>
+                    <tbody class="ob-heading mCustomScrollbar _mCS_8 mCS-autoHide mCS_no_scrollbar"
+                           style="position: relative; overflow: visible;">
+                    <div id="mCSB_8" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                         style="max-height: none;" tabindex="0">
+                        <div id="mCSB_8_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                             style="position:relative; top:0; left:0;" dir="ltr">
+                            <tr>
+                                <td>
+                                    <span>Last Price</span>
+                                    0.020367
+                                </td>
+                                <td>
+                                    <span>USD</span>
+                                    148.65
+                                </td>
+                                <td class="red">
+                                    <span>Change</span>
+                                    -0.51%
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                    <div id="mCSB_8_scrollbar_vertical"
+                         class="mCSB_scrollTools mCSB_8_scrollbar mCS-minimal mCSB_scrollTools_vertical"
+                         style="display: none;">
+                        <div class="mCSB_draggerContainer">
+                            <div id="mCSB_8_dragger_vertical" class="mCSB_dragger"
+                                 style="position: absolute; min-height: 50px; height: 0px; top: 0px;">
+                                <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                            </div>
+                            <div class="mCSB_draggerRail"></div>
+                        </div>
+                    </div>
+                    </tbody>
+                    <tbody class="mCustomScrollbar _mCS_9 mCS-autoHide" style="position: relative; overflow: visible;">
+                    <div id="mCSB_9" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                         style="max-height: none;" tabindex="0">
+                        <div id="mCSB_9_container" class="mCSB_container" style="position:relative; top:0; left:0;"
+                             dir="ltr">
+                            <tr class="green-bg">
+                                <td class="green">0.158373</td>
+                                <td>1.209515</td>
+                                <td>15.23248</td>
+                            </tr>
+                            <tr class="green-bg-5">
+                                <td class="green">0.020851</td>
+                                <td>1.206245</td>
+                                <td>15.25458</td>
+                            </tr>
+                            <tr class="green-bg-8">
+                                <td class="green">0.025375</td>
+                                <td>1.205715</td>
+                                <td>15.65648</td>
+                            </tr>
+                            <tr class="green-bg-10">
+                                <td class="green">0.020252</td>
+                                <td>1.205495</td>
+                                <td>15.24548</td>
+                            </tr>
+                            <tr class="green-bg-20">
+                                <td class="green">0.020373</td>
+                                <td>1.205415</td>
+                                <td>15.25648</td>
+                            </tr>
+                            <tr class="green-bg-40">
+                                <td class="green">0.020156</td>
+                                <td>1.207515</td>
+                                <td>15.28948</td>
+                            </tr>
+                            <tr class="green-bg-60">
+                                <td class="green">0.540375</td>
+                                <td>1.205915</td>
+                                <td>15.25748</td>
+                            </tr>
+                            <tr class="green-bg-80">
+                                <td class="green">0.020372</td>
+                                <td>1.205415</td>
+                                <td>15.25648</td>
+                            </tr>
+                        </div>
+                    </div>
+                    <div id="mCSB_9_scrollbar_vertical"
+                         class="mCSB_scrollTools mCSB_9_scrollbar mCS-minimal mCSB_scrollTools_vertical"
+                         style="display: block;">
+                        <div class="mCSB_draggerContainer">
+                            <div id="mCSB_9_dragger_vertical" class="mCSB_dragger"
+                                 style="position: absolute; min-height: 50px; display: block; height: 126px; max-height: 177px; top: 0px;">
+                                <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                            </div>
+                            <div class="mCSB_draggerRail"></div>
+                        </div>
+                    </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="swal-overlay" tabindex="-1">
+    <div class="swal-modal" role="dialog" aria-modal="true">
+        <div class="swal-icon swal-icon--success">
+            <span class="swal-icon--success__line swal-icon--success__line--long" style="
+transform: rotate(45deg);
+"></span>
+
+
+            <span class="swal-icon--success__line swal-icon--success__line--long" style="
+transform: rotate(-45deg);
+"></span><div class="swal-icon--success__ring"></div>
+            <div class="swal-icon--success__hide-corners"></div>
+        </div>
+        {% if user_kyc_status == 'unverified' %}
+            <div class="swal-title" style="">The withdrawal function is disabled. Complete KYC verification.</div>
+        {% elif user_kyc_status == 'verified' %}
+            <div class="swal-title" style="">Your account is not able to trade at the moment. Please contact Support</div>
+        {% else %}
+            <div class="swal-title" style="">Wait for KYC verification approval.</div>
+        {% endif %}
+        <div class="swal-footer">
+            <div class="swal-button-container">
+                <button class="swal-button swal-button--confirm" style="outline: none">OK</button>
+
+                <div class="swal-button__loader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>.tradingview-widget-copyright {
+    font-size: 13px !important;
+    line-height: 32px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    font-family: 'Trebuchet MS', Arial, sans-serif !important;
+    color: #9db2bd !important;
+}
+
+.tradingview-widget-copyright .blue-text {
+    color: #2196f3 !important;
+}
+
+.tradingview-widget-copyright a {
+    text-decoration: none !important;
+    color: #9db2bd !important;
+}
+
+.tradingview-widget-copyright a:visited {
+    color: #9db2bd !important;
+}
+
+.tradingview-widget-copyright a:hover .blue-text {
+    color: #38acdb !important;
+}
+
+.tradingview-widget-copyright a:active .blue-text {
+    color: #299dcd !important;
+}
+
+.tradingview-widget-copyright a:visited .blue-text {
+    color: #2196f3 !important;
+}</style>
+
+<script src="{% static 'app/exchange/js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'app/exchange/js/popper.min.js' %}"></script>
+<script src="{% static 'app/exchange/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'app/exchange/js/amcharts-core.min.js' %}"></script>
+<script src="{% static 'app/exchange/js/amcharts.min.js' %}"></script>
+<script src="{% static 'app/exchange/js/jquery.mCustomScrollbar.js' %}"></script>
+<script src="{% static 'app/exchange/js/custom.js' %}"></script>
+<script>
+    $('tbody, .market-news ul').mCustomScrollbar({
+        theme: 'minimal',
+    });
+</script>
+
+<script>
+    $('.swal-overlay').addClass('swal-overlay--show-modal')
+    $('.swal-button--confirm').click(function(){
+        $(location).attr('href','/account/');
+    })
+</script>
+
+
+</body>
+{% endblock content %}

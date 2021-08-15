@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="0 0 30 30">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_5" data-name="Rectangle 5" width="30" height="30" transform="translate(50 138)" fill="#101010"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(-50 -138)" clip-path="url(#clip-path)">
+    <g id="_003-pie-chart" data-name="003-pie-chart" transform="translate(50 138)">
+      <g id="Group_14" data-name="Group 14">
+        <g id="Group_13" data-name="Group 13">
+          <path id="Path_1" data-name="Path 1" d="M29.175,16.205h-10.4A.823.823,0,0,0,18.2,17.62l7.321,7.321a.827.827,0,0,0,1.291-.1,13.148,13.148,0,0,0,3.166-7.663A.642.642,0,0,0,30,17.03.824.824,0,0,0,29.175,16.205Z" fill="#f3ab02"/>
+        </g>
+      </g>
+      <g id="Group_16" data-name="Group 16">
+        <g id="Group_15" data-name="Group 15">
+          <path id="Path_2" data-name="Path 2" d="M15.638,1.259a.825.825,0,0,0-.822.825V13.638a.824.824,0,0,0,.822.828H27.2a.827.827,0,0,0,.825-.828A13.23,13.23,0,0,0,15.638,1.259Z" fill="#053eff"/>
+        </g>
+      </g>
+      <g id="Group_18" data-name="Group 18">
+        <g id="Group_17" data-name="Group 17">
+          <path id="Path_3" data-name="Path 3" d="M21.99,24.267l-8.525-8.525a.822.822,0,0,1-.231-.576l0-12.041a.821.821,0,0,0-.822-.822,13.232,13.232,0,1,0,9.526,23.171.817.817,0,0,0,.292-.628A.826.826,0,0,0,21.99,24.267Z" fill="#053eff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

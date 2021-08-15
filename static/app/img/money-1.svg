@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="money" transform="translate(0 -0.006)">
+    <g id="Group_64" data-name="Group 64" transform="translate(0.001 9.293)">
+      <g id="Group_63" data-name="Group 63" transform="translate(0)">
+        <path id="Path_25" data-name="Path 25" d="M.273,238.489a.417.417,0,0,0-.247.533l.262.72L2.28,237.75Z" transform="translate(-0.001 -237.75)" fill="#053eff"/>
+      </g>
+    </g>
+    <g id="Group_66" data-name="Group 66" transform="translate(2.159 16.432)">
+      <g id="Group_65" data-name="Group 65">
+        <path id="Path_26" data-name="Path 26" d="M55.257,420.513l1.2,3.3a.413.413,0,0,0,.216.235.419.419,0,0,0,.176.039.408.408,0,0,0,.144-.026l1.324-.488Z" transform="translate(-55.257 -420.513)" fill="#053eff"/>
+      </g>
+    </g>
+    <g id="Group_68" data-name="Group 68" transform="translate(11.125 9.839)">
+      <g id="Group_67" data-name="Group 67">
+        <path id="Path_27" data-name="Path 27" d="M293.634,255.5l-1.373-3.776-3.3,3.3,1.633-.6a.417.417,0,0,1,.288.782l-2.075.765a.416.416,0,0,1-.535-.247s0-.005,0-.008l-3.492,3.492,8.6-3.17A.415.415,0,0,0,293.634,255.5Z" transform="translate(-284.783 -251.724)" fill="#053eff"/>
+      </g>
+    </g>
+    <g id="Group_70" data-name="Group 70" transform="translate(0.001 0.006)">
+      <g id="Group_69" data-name="Group 69" transform="translate(0 0)">
+        <path id="Path_28" data-name="Path 28" d="M19.9,6.794,13.23.128a.417.417,0,0,0-.589,0l-12.5,12.5a.417.417,0,0,0,0,.589l6.667,6.667a.413.413,0,0,0,.294.122.418.418,0,0,0,.295-.122l12.5-12.5A.418.418,0,0,0,19.9,6.794Zm-15,4.757L3.23,13.218a.417.417,0,0,1-.59-.589l1.667-1.667a.417.417,0,0,1,.59.589Zm7.2.529a1.573,1.573,0,0,1-1.142.437A3.443,3.443,0,0,1,8.633,11.41,3.818,3.818,0,0,1,7.592,9.637a1.741,1.741,0,0,1,.371-1.686A1.736,1.736,0,0,1,9.649,7.58a3.811,3.811,0,0,1,1.773,1.041C12.58,9.778,12.875,11.3,12.092,12.08Zm5.3-4.7L15.73,9.051a.417.417,0,0,1-.59-.589L16.807,6.8a.417.417,0,0,1,.59.589Z" transform="translate(-0.019 -0.006)" fill="#053eff"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,353 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load floattags %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'admin_panel/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/iconly/bold.css' %}">
+
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'admin_panel/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'app/img/favicon.png' %}" type="image/x-icon"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+    <body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="/panel/"><a href="index.html"><h4 class="font-bold">Админ-панель</h4></a></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Меню</li>
+
+                        <li class="sidebar-item active">
+                            <a href="/panel/" class='sidebar-link'>
+                                <i class="iconly-boldProfile"></i>
+                                <span>Профиль</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/panel/mammoths/" class='sidebar-link'>
+                                <i class="iconly-boldUser1"></i>
+                                <span>Мои мамонты</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item ">
+                            <a href="/panel/add-user/" class='sidebar-link'>
+                                <i class="iconly-boldAdd-User"></i>
+                                <span>Добавить мамонта</span>
+                            </a>
+                        </li>
+                        {% if request.user.is_superuser %}
+                            <li class="sidebar-title">Админ меню</li>
+
+                            <li class="sidebar-item ">
+                                <a href="/panel/users/" class='sidebar-link'>
+                                    <i class="iconly-boldUser1"></i>
+                                    <span>Все пользователи</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item ">
+                                <a href="/panel/profits/" class='sidebar-link'>
+                                    <svg style="width: 16px;" class="svg-inline--fa fa-money-bill-alt fa-w-20 fa-fw select-all" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="money-bill-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M352 288h-16v-88c0-4.42-3.58-8-8-8h-13.58c-4.74 0-9.37 1.4-13.31 4.03l-15.33 10.22a7.994 7.994 0 0 0-2.22 11.09l8.88 13.31a7.994 7.994 0 0 0 11.09 2.22l.47-.31V288h-16c-4.42 0-8 3.58-8 8v16c0 4.42 3.58 8 8 8h64c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zM608 64H32C14.33 64 0 78.33 0 96v320c0 17.67 14.33 32 32 32h576c17.67 0 32-14.33 32-32V96c0-17.67-14.33-32-32-32zM48 400v-64c35.35 0 64 28.65 64 64H48zm0-224v-64h64c0 35.35-28.65 64-64 64zm272 192c-53.02 0-96-50.15-96-112 0-61.86 42.98-112 96-112s96 50.14 96 112c0 61.87-43 112-96 112zm272 32h-64c0-35.35 28.65-64 64-64v64zm0-224c-35.35 0-64-28.65-64-64h64v64z"></path></svg>
+                                    <span>Залеты</span>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>Моя статистика</h3>
+            </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon purple">
+                                                    <i class="iconly-boldUser1"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Мамонтов всего</h6>
+                                                <h6 class="font-extrabold mb-0">{{ mammoths }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon blue">
+                                                    <svg class="svg-inline--fa fa-search-dollar fa-w-16 fa-fw select-all"
+                                                         aria-hidden="true" focusable="false" data-prefix="fas"
+                                                         data-icon="search-dollar" role="img"
+                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                         data-fa-i2svg="" style="
+                            color: #fff;
+                            font-size: 1.7rem;
+                        " width="27">
+                                                        <path fill="currentColor"
+                                                              d="M505.04 442.66l-99.71-99.69c-4.5-4.5-10.6-7-17-7h-16.3c27.6-35.3 44-79.69 44-127.99C416.03 93.09 322.92 0 208.02 0S0 93.09 0 207.98s93.11 207.98 208.02 207.98c48.3 0 92.71-16.4 128.01-44v16.3c0 6.4 2.5 12.5 7 17l99.71 99.69c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.59.1-33.99zm-297.02-90.7c-79.54 0-144-64.34-144-143.98 0-79.53 64.35-143.98 144-143.98 79.54 0 144 64.34 144 143.98 0 79.53-64.35 143.98-144 143.98zm27.11-152.54l-45.01-13.5c-5.16-1.55-8.77-6.78-8.77-12.73 0-7.27 5.3-13.19 11.8-13.19h28.11c4.56 0 8.96 1.29 12.82 3.72 3.24 2.03 7.36 1.91 10.13-.73l11.75-11.21c3.53-3.37 3.33-9.21-.57-12.14-9.1-6.83-20.08-10.77-31.37-11.35V112c0-4.42-3.58-8-8-8h-16c-4.42 0-8 3.58-8 8v16.12c-23.63.63-42.68 20.55-42.68 45.07 0 19.97 12.99 37.81 31.58 43.39l45.01 13.5c5.16 1.55 8.77 6.78 8.77 12.73 0 7.27-5.3 13.19-11.8 13.19h-28.1c-4.56 0-8.96-1.29-12.82-3.72-3.24-2.03-7.36-1.91-10.13.73l-11.75 11.21c-3.53 3.37-3.33 9.21.57 12.14 9.1 6.83 20.08 10.77 31.37 11.35V304c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-16.12c23.63-.63 42.68-20.54 42.68-45.07 0-19.97-12.99-37.81-31.59-43.39z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Залетов всего</h6>
+                                                <h6 class="font-extrabold mb-0">{{ all_profits }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon red">
+                                                    <i class="iconly-boldStar"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Последний залет</h6>
+                                                <h6 class="font-extrabold mb-0">{{ last_profit|formatted_float }} $</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-heading">
+                            <h3>Мои настройки</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Подключение чата поддержки</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert alert-secondary">
+                                            <p>Ты можешь включить чат поддержку для мамонтов, просто указав API токен из
+                                                приложения.</p>
+                                        </div>
+                                        <h6 class="font-bold">Статус чата поддержки:
+                                            {% if user.chat_token is None %}
+                                                <span class="text-muted font-semibold">Выключен</span>
+                                            {% else %}
+                                                <span class="text-success font-semibold">Включен</span>
+                                            {% endif %}
+                                        </h6>
+                                        <form action="/panel/user/add-support-token/" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="user_id" value="{{ user.user.id }}">
+                                            <input type="text" id="contact-info"
+                                                   class="form-control mt-4" name="token"
+                                                   placeholder="Укажи токен">
+                                            <button type="submit" class="btn btn-primary mt-3">
+                                                {% if user.chat_token is None %}
+                                                    Добавить
+                                                {% else %}
+                                                    Обновить
+                                                {% endif %}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Реферальное вознаграждение</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert alert-secondary">
+                                            <p>Данное вознаграждение будет выдано для всех ваших мамонтов приведенных по
+                                                реферальной ссылке.</p>
+                                        </div>
+                                        <h6 class="font-bold">Текущее вознаграждение: <span
+                                                class="text-muted font-semibold">{{ user.referral_bonus }} $</span></h6>
+                                        <form action="/panel/user/referral_bonus/" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="user_id" value="{{ user.user.id }}">
+                                            <input type="number" id="contact-info" min="1" step="1"
+                                                   class="form-control mt-4" name="amount"
+                                                   placeholder="Укажи новое вознаграждение">
+                                            <button type="submit" class="btn btn-primary mt-3">Обновить</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Подключение Telegram бота</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert alert-secondary">
+                                            <p>Ты можешь подключить своего телеграм бота, чтобы получать уведомления о
+                                                переходах своих мамонтов. Просто создай нового бота в
+                                                <a href="https://t.me/BotFather" style="color: #435ebe">@BotFather</a> и
+                                                введи полученный токен ниже. Также укажи Telegram User ID полученный в этом боте <a href="https://t.me/chatIDrobot" style="color: #435ebe">@chatIDrobot</a>.</p>
+                                        </div>
+                                        <h6 class="font-bold">Статус бота:
+                                            {% if user.bot_token is None %}
+                                                <span class="text-muted font-semibold">Не подключен</span>
+                                            {% else %}
+                                                <span class="text-success font-semibold">Подключен</span>
+                                            {% endif %}
+                                        </h6>
+                                        <form action="/panel/user/add-bot-token/" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="user_id" value="{{ user.user.id }}">
+                                            <input type="text" id="contact-info"
+                                                   class="form-control mt-4" name="token"
+                                                   placeholder="Укажи токен бота" required>
+                                            <input type="text" id="contact-info"
+                                                   class="form-control mt-4" name="telegram_user_id"
+                                                   placeholder="Укажи Telegram User ID" required>
+                                            <button type="submit" class="btn btn-primary mt-3">
+                                                {% if user.bot_token is None %}
+                                                    Добавить
+                                                {% else %}
+                                                    Обновить
+                                                {% endif %}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Настройка уведомлений</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert alert-secondary">
+                                            <p>Ты можешь настроить получаемые уведомления, для этого просто отметь
+                                                необходимые поля.</p>
+                                        </div>
+                                        <form action="/panel/user/change-notification/" method="post" id="notifForm">
+                                            {% csrf_token %}
+
+                                            <ul class="list-unstyled mb-0" style="margin-left: 10px">
+                                                {% for notification in notifications %}
+                                                    <li class="me-2 mb-1">
+                                                        <div class="form-check">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox"
+                                                                       class="form-check-input"
+                                                                        {% if notification.status is True %}
+                                                                       checked
+                                                                        {% endif %}
+                                                                       name="{{ notification.name }}"
+                                                                       id="checkbox{{ notification.id }}">
+                                                                <label class="form-check-label"
+                                                                       for="customColorCheck1">{{ notification.title }}</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <input type="hidden" name="user_id" value="{{ user.user.id }}">
+                                        </form>
+                                        <script>
+                                            function getCookie(name) {
+                                                var dc = document.cookie;
+                                                var prefix = name + "=";
+                                                var begin = dc.indexOf("; " + prefix);
+                                                if (begin == -1) {
+                                                    begin = dc.indexOf(prefix);
+                                                    if (begin != 0) return null;
+                                                } else {
+                                                    begin += 2;
+                                                    var end = document.cookie.indexOf(";", begin);
+                                                    if (end == -1) {
+                                                        end = dc.length;
+                                                    }
+                                                }
+                                                // because unescape has been deprecated, replaced with decodeURI
+                                                //return unescape(dc.substring(begin + prefix.length, end));
+                                                return decodeURI(dc.substring(begin + prefix.length, end));
+                                            }
+
+                                            $('input[id^="checkbox"]').click(function () {
+                                                if ($(this).is(':checked')) {
+                                                    var status = {'status': true, 'name': $(this).attr("name"), 'user_id':$('input[name="user_id"]').val()};
+                                                } else {
+                                                    var status = {'status': false, 'name': $(this).attr("name"), 'user_id':$('input[name="user_id"]').val()};
+                                                }
+                                                var form = $('#notifForm');
+                                                console.log(form);
+                                                $.ajax(
+                                                    {
+                                                        data: {
+                                                            data: status,
+                                                            csrfmiddlewaretoken: getCookie('csrftoken')
+                                                        },
+                                                        type: 'POST',
+                                                        url: form.attr("action"),
+                                                    }
+                                                )
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'admin_panel/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'admin_panel/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'admin_panel/vendors/apexcharts/apexcharts.js' %}"></script>
+    <script src="{% static 'admin_panel/js/pages/dashboard.js' %}"></script>
+
+    <script src="{% static 'admin_panel/js/main.js' %}"></script>
+    </body>
+{% endblock %}

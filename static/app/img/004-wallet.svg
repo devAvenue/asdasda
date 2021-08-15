@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.267" height="20" viewBox="0 0 18.267 20">
+  <g id="_004-wallet" data-name="004-wallet" transform="translate(-22.183)">
+    <g id="Group_56" data-name="Group 56" transform="translate(31.739 0)">
+      <g id="Group_55" data-name="Group 55" transform="translate(0 0)">
+        <circle id="Ellipse_7" data-name="Ellipse 7" cx="2.586" cy="2.586" r="2.586" fill="#053eff"/>
+      </g>
+    </g>
+    <g id="Group_58" data-name="Group 58" transform="translate(25.86 2.937)">
+      <g id="Group_57" data-name="Group 57" transform="translate(0)">
+        <path id="Path_22" data-name="Path 22" d="M118.893,75.18a2.582,2.582,0,0,0-2.565,2.91h5.13a2.582,2.582,0,0,0-2.565-2.91Z" transform="translate(-116.307 -75.18)" fill="#053eff"/>
+      </g>
+    </g>
+    <g id="Group_60" data-name="Group 60" transform="translate(22.183 7.069)">
+      <g id="Group_59" data-name="Group 59" transform="translate(0)">
+        <path id="Path_23" data-name="Path 23" d="M33.541,184.046h5.567v-2.139a.952.952,0,0,0-.952-.952H23.135a.952.952,0,0,0-.952.952v11.028a.952.952,0,0,0,.952.952h15.02a.952.952,0,0,0,.952-.952V190.8H33.541a2.082,2.082,0,0,1-2.08-2.08v-2.59A2.082,2.082,0,0,1,33.541,184.046Z" transform="translate(-22.183 -180.955)" fill="#053eff"/>
+      </g>
+    </g>
+    <g id="Group_62" data-name="Group 62" transform="translate(32.761 11.459)">
+      <g id="Group_61" data-name="Group 61" transform="translate(0)">
+        <path id="Path_24" data-name="Path 24" d="M299.883,293.361h-6.129a.78.78,0,0,0-.78.78v2.59a.78.78,0,0,0,.78.78h6.129a.78.78,0,0,0,.78-.78v-2.59A.78.78,0,0,0,299.883,293.361Zm-4.839,2.99a.915.915,0,1,1,.915-.915A.915.915,0,0,1,295.044,296.351Z" transform="translate(-292.974 -293.361)" fill="#053eff"/>
+      </g>
+    </g>
+  </g>
+</svg>

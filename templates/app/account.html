@@ -1,0 +1,1485 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load floattags %}
+
+{% block head %}
+    <style type="text/css">
+        .swal-icon--error {
+            border-color: #f27474;
+            -webkit-animation: animateErrorIcon 0.5s;
+            animation: animateErrorIcon 0.5s;
+        }
+
+        .swal-icon--error__x-mark {
+            position: relative;
+            display: block;
+            -webkit-animation: animateXMark 0.5s;
+            animation: animateXMark 0.5s;
+        }
+
+        .swal-icon--error__line {
+            position: absolute;
+            height: 5px;
+            width: 47px;
+            background-color: #f27474;
+            display: block;
+            top: 37px;
+            border-radius: 2px;
+        }
+
+        .swal-icon--error__line--left {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            left: 17px;
+        }
+
+        .swal-icon--error__line--right {
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            right: 16px;
+        }
+
+        @-webkit-keyframes animateErrorIcon {
+            0% {
+                -webkit-transform: rotateX(100deg);
+                transform: rotateX(100deg);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes animateErrorIcon {
+            0% {
+                -webkit-transform: rotateX(100deg);
+                transform: rotateX(100deg);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes animateXMark {
+            0% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            50% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            80% {
+                -webkit-transform: scale(1.15);
+                transform: scale(1.15);
+                margin-top: -6px;
+            }
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                margin-top: 0;
+                opacity: 1;
+            }
+        }
+
+        @keyframes animateXMark {
+            0% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            50% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                margin-top: 26px;
+                opacity: 0;
+            }
+            80% {
+                -webkit-transform: scale(1.15);
+                transform: scale(1.15);
+                margin-top: -6px;
+            }
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                margin-top: 0;
+                opacity: 1;
+            }
+        }
+
+        .swal-icon--warning {
+            border-color: #f8bb86;
+            -webkit-animation: pulseWarning 0.75s infinite alternate;
+            animation: pulseWarning 0.75s infinite alternate;
+        }
+
+        .swal-icon--warning__body {
+            width: 5px;
+            height: 47px;
+            top: 10px;
+            border-radius: 2px;
+            margin-left: -2px;
+        }
+
+        .swal-icon--warning__body,
+        .swal-icon--warning__dot {
+            position: absolute;
+            left: 50%;
+            background-color: #f8bb86;
+        }
+
+        .swal-icon--warning__dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            margin-left: -4px;
+            bottom: -11px;
+        }
+
+        @-webkit-keyframes pulseWarning {
+            0% {
+                border-color: #f8d486;
+            }
+            to {
+                border-color: #f8bb86;
+            }
+        }
+
+        @keyframes pulseWarning {
+            0% {
+                border-color: #f8d486;
+            }
+            to {
+                border-color: #f8bb86;
+            }
+        }
+
+        .swal-icon--success {
+            border-color: #a5dc86;
+        }
+
+        .swal-icon--success:after,
+        .swal-icon--success:before {
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            width: 60px;
+            height: 120px;
+            background: #fff;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .swal-icon--success:before {
+            border-radius: 120px 0 0 120px;
+            top: -7px;
+            left: -33px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: 60px 60px;
+            transform-origin: 60px 60px;
+        }
+
+        .swal-icon--success:after {
+            border-radius: 0 120px 120px 0;
+            top: -11px;
+            left: 30px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: 0 60px;
+            transform-origin: 0 60px;
+            -webkit-animation: rotatePlaceholder 4.25s ease-in;
+            animation: rotatePlaceholder 4.25s ease-in;
+        }
+
+        .swal-icon--success__ring {
+            width: 80px;
+            height: 80px;
+            border: 4px solid hsla(98, 55%, 69%, 0.2);
+            border-radius: 50%;
+            box-sizing: content-box;
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            z-index: 2;
+        }
+
+        .swal-icon--success__hide-corners {
+            width: 5px;
+            height: 90px;
+            background-color: #fff;
+            padding: 1px;
+            position: absolute;
+            left: 28px;
+            top: 8px;
+            z-index: 1;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+
+        .swal-icon--success__line {
+            height: 5px;
+            background-color: #a5dc86;
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .swal-icon--success__line--tip {
+            width: 25px;
+            left: 14px;
+            top: 46px;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            -webkit-animation: animateSuccessTip 0.75s;
+            animation: animateSuccessTip 0.75s;
+        }
+
+        .swal-icon--success__line--long {
+            width: 47px;
+            right: 8px;
+            top: 38px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-animation: animateSuccessLong 0.75s;
+            animation: animateSuccessLong 0.75s;
+        }
+
+        @-webkit-keyframes rotatePlaceholder {
+            0% {
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+            5% {
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+            12% {
+                -webkit-transform: rotate(-405deg);
+                transform: rotate(-405deg);
+            }
+            to {
+                -webkit-transform: rotate(-405deg);
+                transform: rotate(-405deg);
+            }
+        }
+
+        @keyframes rotatePlaceholder {
+            0% {
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+            5% {
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+            12% {
+                -webkit-transform: rotate(-405deg);
+                transform: rotate(-405deg);
+            }
+            to {
+                -webkit-transform: rotate(-405deg);
+                transform: rotate(-405deg);
+            }
+        }
+
+        @-webkit-keyframes animateSuccessTip {
+            0% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            54% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            70% {
+                width: 50px;
+                left: -8px;
+                top: 37px;
+            }
+            84% {
+                width: 17px;
+                left: 21px;
+                top: 48px;
+            }
+            to {
+                width: 25px;
+                left: 14px;
+                top: 45px;
+            }
+        }
+
+        @keyframes animateSuccessTip {
+            0% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            54% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            70% {
+                width: 50px;
+                left: -8px;
+                top: 37px;
+            }
+            84% {
+                width: 17px;
+                left: 21px;
+                top: 48px;
+            }
+            to {
+                width: 25px;
+                left: 14px;
+                top: 45px;
+            }
+        }
+
+        @-webkit-keyframes animateSuccessLong {
+            0% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            65% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            84% {
+                width: 55px;
+                right: 0;
+                top: 35px;
+            }
+            to {
+                width: 47px;
+                right: 8px;
+                top: 38px;
+            }
+        }
+
+        @keyframes animateSuccessLong {
+            0% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            65% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            84% {
+                width: 55px;
+                right: 0;
+                top: 35px;
+            }
+            to {
+                width: 47px;
+                right: 8px;
+                top: 38px;
+            }
+        }
+
+        .swal-icon--info {
+            border-color: #c9dae1;
+        }
+
+        .swal-icon--info:before {
+            width: 5px;
+            height: 29px;
+            bottom: 17px;
+            border-radius: 2px;
+            margin-left: -2px;
+        }
+
+        .swal-icon--info:after,
+        .swal-icon--info:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            background-color: #c9dae1;
+        }
+
+        .swal-icon--info:after {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            margin-left: -3px;
+            top: 19px;
+        }
+
+        .swal-icon {
+            width: 80px;
+            height: 80px;
+            border-width: 4px;
+            border-style: solid;
+            border-radius: 50%;
+            padding: 0;
+            position: relative;
+            box-sizing: content-box;
+            margin: 20px auto;
+        }
+
+        .swal-icon:first-child {
+            margin-top: 32px;
+        }
+
+        .swal-icon--custom {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            border: none;
+            border-radius: 0;
+        }
+
+        .swal-icon img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .swal-title {
+            color: rgba(0, 0, 0, 0.65);
+            font-weight: 600;
+            text-transform: none;
+            position: relative;
+            display: block;
+            padding: 13px 16px;
+            font-size: 27px;
+            line-height: normal;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .swal-title:first-child {
+            margin-top: 26px;
+        }
+
+        .swal-title:not(:first-child) {
+            padding-bottom: 0;
+        }
+
+        .swal-title:not(:last-child) {
+            margin-bottom: 13px;
+        }
+
+        .swal-text {
+            font-size: 16px;
+            position: relative;
+            float: none;
+            line-height: normal;
+            vertical-align: top;
+            text-align: left;
+            display: inline-block;
+            margin: 0;
+            padding: 0 10px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.64);
+            max-width: calc(100% - 20px);
+            overflow-wrap: break-word;
+            box-sizing: border-box;
+        }
+
+        .swal-text:first-child {
+            margin-top: 45px;
+        }
+
+        .swal-text:last-child {
+            margin-bottom: 45px;
+        }
+
+        .swal-footer {
+            text-align: right;
+            padding-top: 13px;
+            margin-top: 13px;
+            padding: 13px 16px;
+            border-radius: inherit;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .swal-button-container {
+            margin: 5px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .swal-button {
+            background-color: #7cd1f9;
+            color: #fff;
+            border: none;
+            box-shadow: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 24px;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .swal-button[not:disabled
+
+        ]
+        :hover {
+            background-color: #78cbf2;
+        }
+
+        .swal-button:active {
+            background-color: #70bce0;
+        }
+
+        .swal-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(43, 114, 165, 0.29);
+        }
+
+        .swal-button[disabled] {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .swal-button::-moz-focus-inner {
+            border: 0;
+        }
+
+        .swal-button--cancel {
+            color: #555;
+            background-color: #efefef;
+        }
+
+        .swal-button--cancel[not:disabled
+
+        ]
+        :hover {
+            background-color: #e8e8e8;
+        }
+
+        .swal-button--cancel:active {
+            background-color: #d7d7d7;
+        }
+
+        .swal-button--cancel:focus {
+            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(116, 136, 150, 0.29);
+        }
+
+        .swal-button--danger {
+            background-color: #e64942;
+        }
+
+        .swal-button--danger[not:disabled
+
+        ]
+        :hover {
+            background-color: #df4740;
+        }
+
+        .swal-button--danger:active {
+            background-color: #cf423b;
+        }
+
+        .swal-button--danger:focus {
+            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(165, 43, 43, 0.29);
+        }
+
+        .swal-content {
+            padding: 0 20px;
+            margin-top: 20px;
+            font-size: medium;
+        }
+
+        .swal-content:last-child {
+            margin-bottom: 20px;
+        }
+
+        .swal-content__input,
+        .swal-content__textarea {
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: none;
+            font-size: 14px;
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.14);
+            padding: 10px 13px;
+            border-radius: 2px;
+            transition: border-color 0.2s;
+        }
+
+        .swal-content__input:focus,
+        .swal-content__textarea:focus {
+            outline: none;
+            border-color: #6db8ff;
+        }
+
+        .swal-content__textarea {
+            resize: vertical;
+        }
+
+        .swal-button--loading {
+            color: transparent;
+        }
+
+        .swal-button--loading ~ .swal-button__loader {
+            opacity: 1;
+        }
+
+        .swal-button__loader {
+            position: absolute;
+            height: auto;
+            width: 43px;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .swal-button__loader div {
+            display: inline-block;
+            float: none;
+            vertical-align: baseline;
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            border: none;
+            margin: 2px;
+            opacity: 0.4;
+            border-radius: 7px;
+            background-color: hsla(0, 0%, 100%, 0.9);
+            transition: background 0.2s;
+            -webkit-animation: swal-loading-anim 1s infinite;
+            animation: swal-loading-anim 1s infinite;
+        }
+
+        .swal-button__loader div:nth-child(3n + 2) {
+            -webkit-animation-delay: 0.15s;
+            animation-delay: 0.15s;
+        }
+
+        .swal-button__loader div:nth-child(3n + 3) {
+            -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+        }
+
+        @-webkit-keyframes swal-loading-anim {
+            0% {
+                opacity: 0.4;
+            }
+            20% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+            to {
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes swal-loading-anim {
+            0% {
+                opacity: 0.4;
+            }
+            20% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+            to {
+                opacity: 0.4;
+            }
+        }
+
+        .swal-overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 10000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .swal-overlay:before {
+            content: " ";
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+
+        .swal-overlay--show-modal {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .swal-overlay--show-modal .swal-modal {
+            opacity: 1;
+            pointer-events: auto;
+            box-sizing: border-box;
+            -webkit-animation: showSweetAlert 0.3s;
+            animation: showSweetAlert 0.3s;
+            will-change: transform;
+        }
+
+        .swal-modal {
+            width: 478px;
+            opacity: 0;
+            pointer-events: none;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            position: static;
+            margin: 20px auto;
+            display: inline-block;
+            vertical-align: middle;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            z-index: 10001;
+            transition: opacity 0.2s, -webkit-transform 0.3s;
+            transition: transform 0.3s, opacity 0.2s;
+            transition: transform 0.3s, opacity 0.2s, -webkit-transform 0.3s;
+        }
+
+        @media (max-width: 500px) {
+            .swal-modal {
+                width: calc(100% - 20px);
+            }
+        }
+
+        @-webkit-keyframes showSweetAlert {
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+            1% {
+                -webkit-transform: scale(0.5);
+                transform: scale(0.5);
+            }
+            45% {
+                -webkit-transform: scale(1.05);
+                transform: scale(1.05);
+            }
+            80% {
+                -webkit-transform: scale(0.95);
+                transform: scale(0.95);
+            }
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes showSweetAlert {
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+            1% {
+                -webkit-transform: scale(0.5);
+                transform: scale(0.5);
+            }
+            45% {
+                -webkit-transform: scale(1.05);
+                transform: scale(1.05);
+            }
+            80% {
+                -webkit-transform: scale(0.95);
+                transform: scale(0.95);
+            }
+            to {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BitVest</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'app/img/favicon.png' %}" type="image/x-icon"/>
+    <!-- bootstrap -->
+    <!-- core:css -->
+    <link rel="stylesheet" href="{% static 'app/css/core.css' %}"/>
+    <link rel="stylesheet" href="{% static 'app/css/dataTables.bootstrap4.css' %}"/>
+    <link rel="stylesheet" href="{% static 'app/css/morris.css' %}"/>
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap-datepicker.min.css' %}"/>
+    <!-- end plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'app/css/iconfont.css' %}"/>
+    <link rel="stylesheet" href="{% static 'app/css/flag-icon.min.css' %}"/>
+    <!-- endinject -->
+    <!-- Layout styles -->
+
+    <link rel="stylesheet" href="{% static 'app/css/light.css' %}"/>
+
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{% static 'app/img/favicon.png' %}"/>
+    <link rel="stylesheet" href="{% static 'app/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'app/css/sweetalert2.min.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'app/css/sweetalert.css' %}"/>
+
+    <script src="https://kit.fontawesome.com/6e47e361b7.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo&amp;display=swap" rel="stylesheet"/>
+    <style type="text/css">
+        html,
+        body {
+            font-family: "Arimo", sans-serif;
+        }
+
+        /*--------------------------------------------------------------
+    # Preloader
+    --------------------------------------------------------------*/
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            overflow: hidden;
+            background: #37517e;
+        }
+
+        #preloader:before {
+            content: "";
+            position: fixed;
+            top: calc(50% - 30px);
+            left: calc(50% - 30px);
+            border: 6px solid #37517e;
+            border-top-color: #fff;
+            border-bottom-color: #fff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            -webkit-animation: animate-preloader 1s linear infinite;
+            animation: animate-preloader 1s linear infinite;
+        }
+
+        @-webkit-keyframes animate-preloader {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes animate-preloader {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = '{{ key }}';
+        window.smartsupp || (function (d) {
+            var s, c, o = smartsupp = function () {
+                o._.push(arguments)
+            };
+            o._ = [];
+            s = d.getElementsByTagName('script')[0];
+            c = d.createElement('script');
+            c.type = 'text/javascript';
+            c.charset = 'utf-8';
+            c.async = true;
+            c.src = 'https://www.smartsuppchat.com/loader.js?';
+            s.parentNode.insertBefore(c, s);
+        })(document);
+    </script>
+{% endblock head %}
+
+{% block content %}
+    <body>
+    <div id="app">
+        <div class="main-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar">
+                <div class="sidebar-header">
+                    <a href="/account/" class="logos"> Bit<span>Vest</span> </a>
+                    <div class="sidebar-toggler not-active">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="sidebar-body ps">
+                    <ul class="nav">
+                        <li class="nav-item nav-category">Main</li>
+                        <li class="nav-item active">
+                            <a href="/account/" class="nav-link">
+                                <img src="{% static 'app/img/Mask Group 1.svg' %}" style="width: 20px; height: 20px;"
+                                     alt="funds"/>
+                                <span class="link-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/exchange/" class="nav-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px" width="512" height="401"
+                                     viewBox="0 0 512 401"
+                                     fill="none">
+                                    <path d="M0 112.024V96.0239C0 82.7689 10.745 72.0239 24 72.0239H384V24.0239C384 2.65693 409.899 -8.01807 424.971 7.05293L504.971 87.0529C514.343 96.4259 514.343 111.622 504.971 120.994L424.971 200.994C409.956 216.006 384 205.48 384 184.024V136.024H24C10.745 136.024 0 125.279 0 112.024ZM488 264.024H128V216.024C128 194.71 102.138 183.944 87.029 199.053L7.029 279.053C-2.343 288.426 -2.343 303.622 7.029 312.994L87.029 392.994C102.057 408.021 128 397.461 128 376.024V328.024H488C501.255 328.024 512 317.279 512 304.024V288.024C512 274.769 501.255 264.024 488 264.024Z"
+                                          fill="#F2A92C"/>
+                                    <path d="M488 264.03H128V216.03C128 194.716 102.138 183.95 87.029 199.059L7.029 279.059C-2.343 288.432 -2.343 303.628 7.029 313L87.029 393C102.057 408.027 128 397.467 128 376.03V328.03H488C501.255 328.03 512 317.285 512 304.03V288.03C512 274.775 501.255 264.03 488 264.03Z"
+                                          fill="#0049F9"/>
+                                </svg>
+                                <span class="link-title">Exchange</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/deposit" class="nav-link">
+                                <img src="{% static 'app/img/Mask Group 3.svg' %}" style="width: 20px; height: 20px;"
+                                     alt="funds"/>
+                                <span class="link-title">Deposits Funds</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/withdraw" class="nav-link">
+                                <img src="{% static 'app/img/Mask Group 4.svg' %}" style="width: 20px; height: 20px;"
+                                     alt="funds"/>
+                                <span class="link-title">Withdraw Funds</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/transaction/" class="nav-link">
+                                <img src="{% static 'app/img/Mask Group 2.svg' %}" style="width: 20px; height: 20px;"
+                                     alt="funds"/>
+                                <span class="link-title">Transaction History</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/esupport/" class="nav-link">
+                                <img src="{% static 'app/img/support_3.svg' %}" style="width: 20px; height: 20px;"
+                                     alt="funds"/>
+                                <span class="link-title">Support</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/settings/" class="nav-link">
+                                <img src="{% static 'app/img/Mask Group 5.svg' %}" style="width: 20px; height: 20px;"
+                                     alt="funds"/>
+                                <span class="link-title">Profile Security</span>
+                            </a>
+                        </li>
+                        {% if request.user.is_staff %}
+                            <li class="nav-item mb-5">
+                                <a href="/panel/" class="nav-link">
+                                    <svg style="width: 20px;" xmlns="http://www.w3.org/2000/svg" width="640"
+                                         height="512"
+                                         viewBox="0 0 640 512" fill="none">
+                                        <path d="M224 256C294.7 256 352 198.7 352 128C352 57.3 294.7 0 224 0C153.3 0 96 57.3 96 128C96 198.7 153.3 256 224 256ZM313.6 288H296.9C274.7 298.2 250 304 224 304C198 304 173.4 298.2 151.1 288H134.4C60.2 288 0 348.2 0 422.4V464C0 490.5 21.5 512 48 512H400C426.5 512 448 490.5 448 464V422.4C448 348.2 387.8 288 313.6 288ZM636.6 159.6L608.8 131.5C604.2 126.8 596.7 126.8 592 131.4L487.2 235.4L441.7 189.6C437.1 184.9 429.6 184.9 424.9 189.5L396.8 217.4C392.1 222 392.1 229.5 396.7 234.2L478.4 316.5C483 321.2 490.5 321.2 495.2 316.6L636.5 176.4C641.1 171.7 641.2 164.2 636.6 159.6Z"
+                                              fill="#0049F9"/>
+                                        <path d="M636.338 159.638L608.538 131.538C603.938 126.838 596.438 126.838 591.738 131.438L486.938 235.438L441.438 189.638C436.838 184.938 429.338 184.938 424.638 189.538L396.538 217.438C391.838 222.038 391.838 229.538 396.438 234.238L478.138 316.538C482.738 321.238 490.238 321.238 494.938 316.638L636.238 176.438C640.838 171.738 640.938 164.238 636.338 159.638Z"
+                                              fill="#F2A92C"/>
+                                    </svg>
+                                    <span class="link-title">Админ-панель</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        <br/>
+                        <li class="nav-item active">
+                            <a
+                                    href="/logout/"
+                                    onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();"
+                            >
+                                <img src="{% static 'app/img/Mask Group 6.svg' %}" style="width: 20px; height: 20px;"
+                                     alt="funds"/> <span class="link-title active ml-5">Logout</span>
+                            </a>
+                            <form id="logout-form" action="/logout/" method="POST" style="display: none;">
+                                {% csrf_token %}
+                            </form>
+                        </li>
+                    </ul>
+                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                    </div>
+                    <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                        <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+                    </div>
+                </div>
+            </nav>
+            <!-- partial -->
+
+            <div class="page-wrapper">
+                <!-- partial:partials/_navbar.html -->
+                <!-- partial:partials/_navbar.html -->
+                <nav class="navbar">
+                    <a href="#" class="sidebar-toggler">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-menu">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </a>
+
+                    <div class="navbar-content">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown nav-messages">
+                                Hello, <span class="text-primary ml-1 mr-1"> {{ request.user.username }} </span> <br/>
+                                <br/>
+
+                                {% if user_kyc_status == 'unverified' %}
+                                    <a href="/user/kyc/" class="badge badge-danger">Unverified</a>
+                                {% elif user_kyc_status == 'verified' %}
+                                    <a href="#" class="badge badge-success">Verified</a>
+                                {% else %}
+                                    <a href="#" class="badge badge-warning">Waiting</a>
+                                {% endif %}
+                            </li>
+                            <li class="nav-item dropdown nav-profile">
+                                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img style="" class="img img-responsive"
+                                         src="{% static 'app/img/avatar.svg' %}"
+                                         alt="..."/>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- partial -->
+                <!-- partial -->
+
+                <div class="page-content">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+                        <div>
+                            <h3 class="mb-3 mb-md-0">Dashboard</h3>
+                            <p class="text-muted tx-13 mb-3 mb-md-0">Revenue is the income that a business has from its
+                                normal business activities</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-xl-12 stretch-card">
+                            <div class="row flex-grow">
+                                <div class="col-md-3 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <h3>
+                                                    <span class="badge" style="background-color: #cdd8ff;">
+                                                        &nbsp;<img src="{% static 'app/img/money-1.svg' %}"
+                                                                   style="width: 15px; height: 15px;" alt="funds"/>&nbsp;
+                                                    </span>
+                                                </h3>
+                                                <div class="media-body tiles-body">
+                                                    <h6 class="mt-0 mb-1">Current Balance</h6>
+
+                                                    <h6 class="ml-2">$ {{ total_balance|formatted_float }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 grid-margin stretch-card">
+                                    <div class="card tiles">
+                                        <div class="card-body">
+                                            <div class="media tiles-body">
+                                                <h3>
+                                                    <span class="badge" style="background-color: #cdd8ff;">
+                                                        &nbsp;<img src="{% static 'app/img/002-money.svg' %}"
+                                                                   style="width: 15px; height: 15px;" alt="funds"/>&nbsp;
+                                                    </span>
+                                                </h3>
+                                                <div class="media-body tiles-body">
+                                                    <h6 class="mt-0 mb-1">Last Withdrawal</h6>
+
+                                                    <h6 class="ml-2">$ 0</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 grid-margin stretch-card">
+                                    <div class="card tiles">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <h3>
+                                                    <span class="badge" style="background-color: #cdd8ff;">
+                                                        &nbsp;<img src="{% static 'app/img/004-wallet.svg' %}"
+                                                                   style="width: 15px; height: 15px;" alt="funds"/>&nbsp;
+                                                    </span>
+                                                </h3>
+                                                <div class="media-body tiles-body">
+                                                    <h6 class="mt-0 mb-1">Last Deposit</h6>
+                                                    <h6 class="ml-2">$ {{ last_deposit|formatted_float }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- row -->
+
+                    <div class="row">
+                        <div class="col-lg-8 col-xl-8 stretch-card">
+                            <div class="row flex-grow">
+                                <div class="col-sm-6 col-md-4 col-lg-4 grid-margin stretch-card">
+                                    <div class="card tiles">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <h3>
+                                                    <img src="{% static 'app/img/btc.png' %}" alt="" width="32">
+                                                </h3>
+                                                <div class="media-body tiles-body">
+                                                    <h6 class="mt-0 mb-2">Bitcoin</h6>
+
+                                                    <span style="display: flex; align-items: center;"><h4 class="ml-2"
+                                                                                                          style="margin-right: 5px;">{{ btc.balance|formatted_float }} </h4> <b> BTC</b></span>
+                                                    <p class="text-muted mb-3">$ {{ btc_usdt|formatted_float }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="payment-detalis"
+                                                 style="display: flex; justify-content: center;">
+                                                <a href="/deposit?coin=btc"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-right: 10px;">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                    Deposit
+                                                </a>
+                                                <a href="/withdraw?coin=btc"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-left: 10px;">
+                                                    <i class="fas fa-arrow-up"></i>
+                                                    Withdraw
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-4 grid-margin stretch-card">
+                                    <div class="card tiles">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <h3>
+                                                    <img src="{% static 'app/img/eth.png' %}" alt="" width="32">
+                                                </h3>
+                                                <div class="media-body tiles-body">
+                                                    <h6 class="mt-0 mb-2">Ethereum</h6>
+
+                                                    <span style="display: flex; align-items: center;"><h4 class="ml-2"
+                                                                                                          style="margin-right: 5px;">{{ eth.balance|formatted_float }} </h4> <b> ETH</b></span>
+                                                    <p class="text-muted mb-3">$ {{ eth_usdt|formatted_float }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="payment-detalis"
+                                                 style="display: flex; justify-content: center;">
+                                                <a href="/deposit?coin=eth"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-right: 10px;">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                    Deposit
+                                                </a>
+                                                <a href="/withdraw?coin=eth"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-left: 10px;">
+                                                    <i class="fas fa-arrow-up"></i>
+                                                    Withdraw
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-4 grid-margin stretch-card">
+                                    <div class="card tiles">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <h3>
+                                                    <img src="{% static 'app/img/ltc.png' %}" alt="" width="32">
+                                                </h3>
+                                                <div class="media-body tiles-body">
+                                                    <h6 class="mt-0 mb-2">Litecoin</h6>
+
+                                                    <span style="display: flex; align-items: center;"><h4 class="ml-2"
+                                                                                                          style="margin-right: 5px;">{{ ltc.balance|formatted_float }} </h4> <b> LTC</b></span>
+                                                    <p class="text-muted mb-3">$ {{ ltc_usdt|formatted_float }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="payment-detalis"
+                                                 style="display: flex; justify-content: center;">
+                                                <a href="/deposit?coin=ltc"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-right: 10px;">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                    Deposit
+                                                </a>
+                                                <a href="/withdraw?coin=ltc"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-left: 10px;">
+                                                    <i class="fas fa-arrow-up"></i>
+                                                    Withdraw
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-4 grid-margin stretch-card">
+                                    <div class="card tiles">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <h3>
+                                                    <img src="{% static 'app/img/usdt.png' %}" alt="" width="32">
+                                                </h3>
+                                                <div class="media-body tiles-body">
+                                                    <h6 class="mt-0 mb-2">Tether</h6>
+
+                                                    <span style="display: flex; align-items: center;"><h4 class="ml-2"
+                                                                                                          style="margin-right: 5px;">{{ usdt.balance|formatted_float }} </h4> <b> USDT</b></span>
+                                                    <p class="text-muted mb-3">$ {{ usdt.balance|formatted_float }}</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="payment-detalis"
+                                                 style="display: flex; justify-content: center;">
+                                                <a href="/deposit?coin=usdt"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-right: 10px;">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                    Deposit
+                                                </a>
+                                                <a href="/withdraw?coin=usdt"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-left: 10px;">
+                                                    <i class="fas fa-arrow-up"></i>
+                                                    Withdraw
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-4 grid-margin stretch-card">
+                                    <div class="card tiles">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <h3>
+                                                    <img src="{% static 'app/img/dash.png' %}" alt="" width="32">
+                                                </h3>
+                                                <div class="media-body tiles-body">
+                                                    <h6 class="mt-0 mb-2">Dash</h6>
+
+                                                    <span style="display: flex; align-items: center;"><h4 class="ml-2"
+                                                                                                          style="margin-right: 5px;">{{ dash.balance|formatted_float }} </h4> <b> DASH</b></span>
+                                                    <p class="text-muted mb-3">$ {{ dash_usdt|formatted_float }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="payment-detalis"
+                                                 style="display: flex; justify-content: center;">
+                                                <a href="/deposit?coin=dash"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-right: 10px;">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                    Deposit
+                                                </a>
+                                                <a href="/withdraw?coin=dash"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-left: 10px;">
+                                                    <i class="fas fa-arrow-up"></i>
+                                                    Withdraw
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-4 grid-margin stretch-card">
+                                    <div class="card tiles">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <h3>
+                                                    <img src="{% static 'app/img/bch.png' %}" alt="" width="32">
+                                                </h3>
+                                                <div class="media-body tiles-body">
+                                                    <h6 class="mt-0 mb-2">Bitcoin Cash</h6>
+
+                                                    <span style="display: flex; align-items: center;"><h4 class="ml-2"
+                                                                                                          style="margin-right: 5px;">{{ bch.balance|formatted_float }} </h4> <b> BCH</b></span>
+                                                    <p class="text-muted mb-3">$ {{ bch_usdt|formatted_float }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="payment-detalis"
+                                                 style="display: flex; justify-content: center;">
+                                                <a href="/deposit?coin=bch"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-right: 10px;">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                    Deposit
+                                                </a>
+                                                <a href="/withdraw?coin=bch"
+                                                   style="background: #fbbc06;color: #000;padding: 5px 15px;border-radius: 16px; margin-left: 10px;">
+                                                    <i class="fas fa-arrow-up"></i>
+                                                    Withdraw
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-xl-4 stretch-card mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                        <h6 class="card-title mb-0">IP Log</h6>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table" id="tbl-IP">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="color:#000;">DATE/TIME</th>
+                                                        <th style="color:#000;">IP ADDRESS</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for visit in last_visits %}
+                                                        <tr>
+                                                            <th>{{ visit.last_login|date:'d-m-Y' }}
+                                                                / {{ visit.last_login|time }}</th>
+                                                            <th>{{ visit.ip }}</th>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-12 stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                        <h6 class="card-title mb-0">Last transaction</h6>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table" id="tbl-IP">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="color:#000;">DATE/TIME</th>
+                                                        <th style="color:#000;">Amount</th>
+                                                        <th style="color:#000;">Currency</th>
+                                                        <th style="color:#000;">Transaction info</th>
+                                                        <th style="color:#000;">Status</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for trans in last_trans %}
+                                                        <tr>
+                                                            <th>{{ trans.date|date:'d-m-Y' }}
+                                                                / {{ trans.date|time }}</th>
+                                                            <th>{{ trans.amount|formatted_float }}</th>
+                                                            <th>{{ trans.currency|upper }}</th>
+                                                            <th>{{ trans.method }}</th>
+                                                            <th style="color: green;"><i
+                                                                    class="fas fa-check-circle"></i> {{ trans.status }}
+                                                            </th>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jquery -->
+    <script src="{% static 'app/js/jquery.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <!-- owl carousel -->
+    <!-- core:js -->
+    <script src="{% static 'app/js/core.js' %}"></script>
+    <!-- endinject -->
+    <!-- plugin js for this page -->
+    <script src="js/jquery.dataTables.js"></script>
+    <script src="{% static 'app/js/dataTables.bootstrap4.js' %}"></script>
+    <script src="js/raphael.min.js"></script>
+    <script src="{% static 'app/js/morris.min.js' %}"></script>
+    <script src="{% static 'app/js/morris.js' %}"></script>
+    <script src="{% static 'app/js/jquery.flot.js' %}"></script>
+    <script src="{% static 'app/js/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'app/js/progressbar.min.js' %}"></script>
+    <!-- end plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'app/js/feather.min.js' %}"></script>
+    <script src="{% static 'app/js/template.js' %}"></script>
+    <!-- endinject -->
+    <!-- custom js for this page -->
+    <script src="{% static 'app/js/dashboard.js' %}"></script>
+    <script src="{% static 'app/js/datepicker.js' %}"></script>
+    <script src="{% static 'app/js/sweetalert2.min.js' %}"></script>
+
+    <script src="{% static 'app/js/sweetalert.js' %}"></script>
+
+    <script>
+        // Preloader
+        $(window).on("load", function () {
+            if ($("#preloader").length) {
+                $("#preloader")
+                    .delay(100)
+                    .fadeOut("slow", function () {
+                        $(this).remove();
+                    });
+            }
+        });
+
+        $(document).on("change", "#langSel", function () {
+            var code = $(this).val();
+            window.location.href = "https://qptradings.com/change-lang/" + code;
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var winheight = $(window).height() - 150;
+            $("#justify-height").css("min-height", winheight + "px");
+        });
+    </script>
+    </body>
+{% endblock content %}

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load floattags %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'admin_panel/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/simple-datatables/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/iconly/bold.css' %}">
+
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'admin_panel/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'app/img/favicon.png' %}" type="image/x-icon"/>
+{% endblock %}
+
+{% block content %}
+    <body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="/panel/"><a href="/panel/"><h4 class="font-bold">Админ-панель</h4></a></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Меню</li>
+
+                        <li class="sidebar-item">
+                            <a href="/panel/" class='sidebar-link'>
+                                <i class="iconly-boldProfile"></i>
+                                <span>Профиль</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active">
+                            <a href="/panel/mammoths/" class='sidebar-link'>
+                                <i class="iconly-boldUser1"></i>
+                                <span>Мои мамонты</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="/panel/add-user/" class='sidebar-link'>
+                                <i class="iconly-boldAdd-User"></i>
+                                <span>Добавить мамонта</span>
+                            </a>
+                        </li>
+                        {% if request.user.is_superuser %}
+                            <li class="sidebar-title">Админ меню</li>
+
+                            <li class="sidebar-item ">
+                                <a href="/panel/users/" class='sidebar-link'>
+                                    <i class="iconly-boldUser1"></i>
+                                    <span>Все пользователи</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item ">
+                                <a href="/panel/profits/" class='sidebar-link'>
+                                    <svg style="width: 16px;" class="svg-inline--fa fa-money-bill-alt fa-w-20 fa-fw select-all" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="money-bill-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M352 288h-16v-88c0-4.42-3.58-8-8-8h-13.58c-4.74 0-9.37 1.4-13.31 4.03l-15.33 10.22a7.994 7.994 0 0 0-2.22 11.09l8.88 13.31a7.994 7.994 0 0 0 11.09 2.22l.47-.31V288h-16c-4.42 0-8 3.58-8 8v16c0 4.42 3.58 8 8 8h64c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zM608 64H32C14.33 64 0 78.33 0 96v320c0 17.67 14.33 32 32 32h576c17.67 0 32-14.33 32-32V96c0-17.67-14.33-32-32-32zM48 400v-64c35.35 0 64 28.65 64 64H48zm0-224v-64h64c0 35.35-28.65 64-64 64zm272 192c-53.02 0-96-50.15-96-112 0-61.86 42.98-112 96-112s96 50.14 96 112c0 61.87-43 112-96 112zm272 32h-64c0-35.35 28.65-64 64-64v64zm0-224c-35.35 0-64-28.65-64-64h64v64z"></path></svg>
+                                    <span>Залеты</span>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Мои мамонты</h3>
+                            <p class="text-subtitle text-muted">Ты можешь посмотреть своих мамонтов в этой таблице</p>
+                        </div>
+                    </div>
+                </div>
+                <section class="section">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Почта</th>
+                                        <th>Имя пользователя</th>
+                                        <th>Пароль</th>
+                                        <th>Статус</th>
+                                        <th>Дата регистрации</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    {% if user.referred.is_worker is True %}
+                                    {% else %}
+                                        <tr>
+                                            <td><a href="/panel/user/{{ user.referred.user.id }}/">{{ user.referred.user.email}}</a></td>
+                                            <td>{{ user.referred.user.username }}</td>
+                                            <td>{{ user.referred.password }}</td>
+                                            {% if user.referred.user.is_active is False %}
+                                                <td>Заблокирован</td>
+                                            {% else %}
+                                                <td>Мамонт</td>
+                                            {% endif %}
+                                            <td>{{ user.referred.user.date_joined|date:'d-m-Y' }} {{ user.referred.user.date_joined|time }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'admin_panel/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'admin_panel/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'admin_panel/vendors/simple-datatables/simple-datatables.js' %}"></script>
+    <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+
+    <script src="{% static 'admin_panel/js/main.js' %}"></script>
+    </body>
+{% endblock %}

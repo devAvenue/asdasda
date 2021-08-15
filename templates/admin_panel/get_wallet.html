@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load floattags %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'admin_panel/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/iconly/bold.css' %}">
+
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'admin_panel/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'admin_panel/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'app/img/favicon.png' %}" type="image/x-icon"/>
+{% endblock %}
+
+{% block content %}
+    <body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="/panel/"><h4 class="font-bold">Админ-панель</h4></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Меню</li>
+
+                        <li class="sidebar-item">
+                            <a href="/panel/" class='sidebar-link'>
+                                <i class="iconly-boldProfile"></i>
+                                <span>Профиль</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/panel/mammoths/" class='sidebar-link'>
+                                <i class="iconly-boldUser1"></i>
+                                <span>Мои мамонты</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/panel/add-user/" class='sidebar-link'>
+                                <i class="iconly-boldAdd-User"></i>
+                                <span>Добавить мамонта</span>
+                            </a>
+                        </li>
+                        {% if request.user.is_superuser %}
+                            <li class="sidebar-title">Админ меню</li>
+
+                            <li class="sidebar-item ">
+                                <a href="/panel/users/" class='sidebar-link'>
+                                    <i class="iconly-boldUser1"></i>
+                                    <span>Все пользователи</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item ">
+                                <a href="/panel/profits/" class='sidebar-link'>
+                                    <svg style="width: 16px;"
+                                         class="svg-inline--fa fa-money-bill-alt fa-w-20 fa-fw select-all"
+                                         aria-hidden="true" focusable="false" data-prefix="fas"
+                                         data-icon="money-bill-alt" role="img" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 640 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                              d="M352 288h-16v-88c0-4.42-3.58-8-8-8h-13.58c-4.74 0-9.37 1.4-13.31 4.03l-15.33 10.22a7.994 7.994 0 0 0-2.22 11.09l8.88 13.31a7.994 7.994 0 0 0 11.09 2.22l.47-.31V288h-16c-4.42 0-8 3.58-8 8v16c0 4.42 3.58 8 8 8h64c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zM608 64H32C14.33 64 0 78.33 0 96v320c0 17.67 14.33 32 32 32h576c17.67 0 32-14.33 32-32V96c0-17.67-14.33-32-32-32zM48 400v-64c35.35 0 64 28.65 64 64H48zm0-224v-64h64c0 35.35-28.65 64-64 64zm272 192c-53.02 0-96-50.15-96-112 0-61.86 42.98-112 96-112s96 50.14 96 112c0 61.87-43 112-96 112zm272 32h-64c0-35.35 28.65-64 64-64v64zm0-224c-35.35 0-64-28.65-64-64h64v64z"></path>
+                                    </svg>
+                                    <span>Залеты</span>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>Информация о кошельке</h3>
+            </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-sm-12 col-md-8">
+                        <div class="card">
+                            <div class="card-body py-4 px-5">
+                                <form class="form form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Валюта кошелька</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <input type="text" id="first-name" class="form-control"
+                                                       name="fname" disabled
+                                                       value="{{ wallet.name|upper }}">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Адрес кошелька</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <div class="input-group">
+                                                    <button class="btn btn-primary" type="button" onclick='myFunction("address")' id="button-addon1">Скопировать</button>
+                                                    <input type="text" class="form-control" value="{{ wallet.address }}" id="address" readonly aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Приватный ключ</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <div class="input-group">
+                                                    <button class="btn btn-primary" type="button" onclick='myFunction("wif")' id="button-addon1">Скопировать</button>
+                                                    <input type="text" class="form-control" value="{{ wallet.wif }}" id="wif" readonly aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                </div>
+                                            </div>
+                                            {% if wallet.seed is not None %}
+                                                <div class="col-md-4">
+                                                    <label>SEED Фраза</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                <div class="input-group">
+                                                    <button class="btn btn-primary" type="button" onclick='myFunction("seed")' id="button-addon1">Скопировать</button>
+                                                    <input type="text" class="form-control" value="{{ wallet.seed }}" id="seed" readonly aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'admin_panel/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'admin_panel/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'admin_panel/vendors/apexcharts/apexcharts.js' %}"></script>
+    <script src="{% static 'admin_panel/js/pages/dashboard.js' %}"></script>
+
+    <script src="{% static 'admin_panel/js/main.js' %}"></script>
+    <script>
+        function myFunction(val) {
+            var copyText = document.getElementById(val);
+            copyText.select();
+            document.execCommand("copy");
+        }
+    </script>
+    </body>
+{% endblock %}
